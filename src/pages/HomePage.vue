@@ -1,11 +1,14 @@
 <template>
     <div>
-      <h1>Home Page</h1>
+        <h1>Home Page</h1>
     </div>
-  </template>
+</template>
 
-  <script>
-  export default {
-    name: 'HomePage'  
-  };
-  </script>
+<script>
+export default {
+    name: 'HomePage',
+    meta: {
+        title: 'Корпорация «Галактика»'
+    },
+};
+</script>
