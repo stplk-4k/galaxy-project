@@ -1,22 +1,24 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../components/Home.vue';
-import About from '../components/About.vue';
+import Home from '../pages/Home.vue';
+import Catalog from '../pages/Catalog.vue';
+import Service from '../pages/Service.vue';
+import Contacts from '../pages/Contacts.vue';
+import About from '../pages/About.vue';
+import History from '../pages/History.vue';
+import Team from '../pages/Team.vue';
 
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history', // Или 'hash', разница будет в # в ссылке у хеша, а у хистори не будет #
+  mode: 'history', 
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About,
-    },
+    { path: '/', name: 'Home', component: Home },
+    { path: '/catalog', name: 'Catalog', component: Catalog },
+    { path: '/services', name: 'Service', component: Service },
+    { path: '/contacts', name: 'Contacts', component: Contacts },
+    { path: '/about', name: 'About', component: About },
+    { path: '/history', name: 'History', component: History },
+    { path: '/team', name: 'Team', component: Team },
   ],
 });
