@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --g-blue: #0060cc;
+    --g-gray: #ddd;
+}
+
+body {
+    background: #f8f8f8;
+    /* font-family: mr; */
+}
+
+#header {
+    margin-bottom: 50px;
+}
+
+.header {
+    background: var(--g-gray);
+}
+
+.logo-header {
+    text-align: center;
+}
