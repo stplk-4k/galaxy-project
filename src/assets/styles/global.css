@@ -8,9 +8,20 @@
     --g-gray: #ddd;
 }
 
+@font-face {
+    font-family: 'mr';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/Montserrat-Regular.eot');
+    src:
+        url('../fonts/Montserrat-Regular.ttf') format('truetype'),
+        url('../fonts/Montserrat-Regular.woff') format('woff'), 
+        url('../fonts/Montserrat-Regular.woff2') format('woff2'), 
+}
+
 body {
     background: #f8f8f8;
-    /* font-family: mr; */
+    font-family: mr;
 }
 
 #header {
@@ -18,9 +29,14 @@ body {
 }
 
 .header {
-    background: var(--g-gray);
+    border: solid 3px var(--g-gray);
+    border-radius: 0px 0px 25px 25px;
 }
 
 .logo-header {
-    text-align: center;
+    margin-left: 10px;
+}
+.logo-text {
+    font-size: 30px;
+    margin-top: 15px;
 }
