@@ -6,6 +6,7 @@ import Contacts from '../pages/ContactsPage.vue';
 import About from '../pages/AboutPage.vue';
 import History from '../pages/HistoryPage.vue';
 import Team from '../pages/TeamPage.vue';
+import ProductAmm from '../pages/products/ProductAmm.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -15,6 +16,7 @@ const routes = [
     { path: '/about', name: 'About', component: About },
     { path: '/history', name: 'History', component: History },
     { path: '/team', name: 'Team', component: Team },
+    { path: '/product-amm', name: 'ProductAmm', component: ProductAmm },
   ];
   
   const router = createRouter({

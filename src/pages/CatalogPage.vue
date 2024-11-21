@@ -8,7 +8,8 @@
         <div class="row catalog-row">
           <div class="col-9 catalog-text">
             <h3>
-              <a href="/pages/products/amm.html">«Галактика AMM»</a>
+              <router-link to="/product-amm">«Галактика AMM»</router-link>
+              <!-- <a href="/pages/products/amm.html">«Галактика AMM»</a> -->
             </h3>
             <p>Постройте прибыльный и эффективный производственный процесс на любом предприятии</p>
           </div>
