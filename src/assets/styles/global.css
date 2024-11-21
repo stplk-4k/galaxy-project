@@ -245,3 +245,24 @@ h3 {
 .about-row-last {
     margin-bottom: 0;
 }
+
+/* HISTORY */
+
+.history-year {
+    color: var(--g-blue);
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-ul {
+    margin-right: 40px;
+    list-style: none;
+}
+.history-line {
+    background: var(--g-blue);
+    width: 100%;
+    height: 1px;
+    margin: 20px 0 20px 0;
+}
