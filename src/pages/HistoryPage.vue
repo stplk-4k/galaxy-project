@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="history">
       <div class="container">
         <h2>История корпорации</h2>
@@ -558,7 +557,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="about">
       <div class="container">
         <h2>О корпорации</h2>
@@ -130,7 +129,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

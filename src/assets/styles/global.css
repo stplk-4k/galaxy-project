@@ -266,3 +266,33 @@ h3 {
     height: 1px;
     margin: 25px 0 40px 0;
 }
+
+/* TEAM */
+
+.team-img {
+    width: 200px;
+    border-radius: 25px;
+}
+
+.team-h {
+    margin-left: 10px;
+}
+
+.team-row {
+    display:table-row;
+    margin-bottom: 30px;
+}
+
+.team-row-space {
+    margin-bottom: 50px;
+}
+
+.team-text {
+    display:table-cell; 
+    vertical-align:middle;
+    margin-right: 30px;
+}
+
+.team-text-p {
+    margin-right: 30px;
+}
