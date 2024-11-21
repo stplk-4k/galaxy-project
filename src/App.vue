@@ -16,7 +16,7 @@
         </div>
         
 
-        
+        <FooterComponent />
       </div>
     </div>
   </div>
@@ -24,6 +24,7 @@
 
 
 <script setup>
+import FooterComponent from './components/FooterComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MenuComponent from './components/MenuComponent.vue';
 import SidebarComponent from './components/SidebarComponent.vue';

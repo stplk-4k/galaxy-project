@@ -154,3 +154,13 @@ body {
     border-radius: 25px 25px 0px 0px ;
     padding: 15px 0 15px 0;
 }
+
+/* FOOTER */
+
+.footer-ul {
+    padding-left: 0;
+}
+.footer-text {
+    text-align: center;
+    margin-top: 40px;
+}
