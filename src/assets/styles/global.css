@@ -6,6 +6,7 @@
 :root {
     --g-blue: #0060cc;
     --g-gray: #ddd;
+    --g-light: #f8f8f8;
 }
 
 @font-face {
@@ -20,23 +21,93 @@
 }
 
 body {
-    background: #f8f8f8;
+    background: var(--g-light);
     font-family: mr;
 }
+
+/* HEADER */
 
 #header {
     margin-bottom: 50px;
 }
 
 .header {
-    border: solid 3px var(--g-gray);
+    background: var(--g-gray);
     border-radius: 0px 0px 25px 25px;
+    padding: 15px 0 15px 0;
+
+}
+
+.header-img {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
 }
 
 .logo-header {
-    margin-left: 10px;
+    display: block;
+    margin: 0 auto; 
 }
 .logo-text {
     font-size: 30px;
     margin-top: 15px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.header-text {
+    display: flex;
+    align-items: center;
+}
+
+.header-div-form {
+    display: flex;
+    justify-content: end;
+}
+
+.header-form {
+    margin-right: 40px;
+}
+.header-form-label {
+    font-size: 14px;
+}
+
+#inputPassword6 {
+    font-size: 14px;
+}
+
+.header-form .form-control {
+    max-width: 200px; 
+}
+
+.header-form-login {
+    margin-right: 10px;
+}
+
+.btn-header {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: var(--g-blue);
+    border: var(--g-blue) 1px solid;
+}
+.btn-primary:hover {
+    background: var(--g-light);
+    border: var(--g-blue) 1px solid;
+    color: var(--g-blue);
+}
+
+.btn-link {
+    color: var(--g-blue);
+    text-decoration: none;
+}
+.btn-link:hover {
+    background: var(--g-light);
+    border: var(--g-blue) 1px solid;
+    color: var(--g-blue);
+}
+
+.header-buttons {
+    justify-content: end;
 }

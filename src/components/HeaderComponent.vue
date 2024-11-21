@@ -4,45 +4,41 @@
             <div class="container">
                 <div class="header">
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 header-img">
                             <img class="logo-header p-3" src="../assets/img/logo-blue.png" alt="Логотип">
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-5 header-text">
                             <h1 class="logo-text">Корпорация «Галактика»</h1>
                         </div>
-                        <div class="col-sm-5">
-                            <!-- <form @submit.prevent="handleSubmit">
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Логин:</label>
-                                    <input type="text" id="username" class="form-control" v-model="username" required />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Пароль:</label>
-                                    <input type="password" id="password" class="form-control" v-model="password"
-                                        required />
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary">Войти</button>
-                                </div>
-                            </form> -->
-                            <form>
-                                <div class="row g-3 mb-3  align-items-center">
-                                    <div class="col-auto mr-5">
-                                        <label for="inputLogin" class="col-form-label">Логин</label>
+                        <div class="col-sm-4 header-div-form">
+                            <form class="header-form">
+                                <div class="row g-3 mb-3 align-items-right ">
+                                    <div class="col-auto mr-5 header-form-login">
+                                        <label for="inputLogin" class="col-form-label header-form-label">Логин</label>
                                     </div>
-                                    <div class="col-auto">
-                                        <input type="еуче" id="inputPassword6" class="form-control"
+                                    <div class="col-auto ">
+                                        <input type="text" id="inputPassword6" class="form-control"
                                             aria-describedby="passwordHelpInline">
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="inputPassword6" class="col-form-label">Пароль</label>
+                                        <label for="inputPassword6"
+                                            class="col-form-label header-form-label">Пароль</label>
                                     </div>
                                     <div class="col-auto">
                                         <input type="password" id="inputPassword6" class="form-control"
                                             aria-describedby="passwordHelpInline">
                                     </div>
+                                </div>
+                                <div class="row mt-3 header-buttons">
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-link btn-header">Регистрация</button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary btn-header">Войти</button>
+                                    </div>
+
                                 </div>
                             </form>
                         </div>
