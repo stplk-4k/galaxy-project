@@ -28,7 +28,7 @@ body {
 /* HEADER */
 
 #header {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .header {
@@ -110,4 +110,21 @@ body {
 
 .header-buttons {
     justify-content: end;
+}
+
+/* MENU */
+
+.menu-ul {
+    display: flex;
+    justify-content:space-around;
+    list-style: none;
+    align-items: center;
+    margin-bottom: 30px;
+    
+}
+
+.menu-ul li a {
+    text-decoration: none;
+    color: var(--g-blue);
+    font-size: 18px;
 }
