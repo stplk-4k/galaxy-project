@@ -120,11 +120,37 @@ body {
     list-style: none;
     align-items: center;
     margin-bottom: 30px;
-    
 }
 
 .menu-ul li a {
     text-decoration: none;
     color: var(--g-blue);
     font-size: 18px;
+}
+
+/* SIDEBAR */
+
+.sidebar-ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 30px 0 0 10px;
+}
+
+.sidebar-ul li a {
+    text-decoration: none;
+    color: var(--g-blue);
+    font-size: 18px;
+}
+
+.sidebar-ul li {
+    margin-bottom: 10px;
+}
+
+/* MAIN */
+
+.main-app {
+    background: var(--g-gray);
+    border-radius: 25px 25px 0px 0px ;
+    padding: 15px 0 15px 0;
 }
