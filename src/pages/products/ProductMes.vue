@@ -37,7 +37,7 @@
 
         </div>
         <div class="col-3">
-          <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/mes.png" alt="«Галактика MES">
+          <img class="catalog-img product-img catalog-img-size" src="@/assets/img/catalog/mes.png" alt="«Галактика MES">
         </div>
       </div>
     </div>

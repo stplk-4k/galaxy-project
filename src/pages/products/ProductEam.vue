@@ -2,7 +2,7 @@
   <div class="product">
     <div class="container">
       <h2 class="product-h2">Подробное описание услуги</h2>
-      <div class="row catalog-row">
+      <div class="row product-row">
         <div class="col-9 ">
           <h3 class="product-h-name">
             «Галактика EAM»
@@ -54,7 +54,7 @@
 
         </div>
         <div class="col-3">
-          <img class="catalog-img " src="@/assets/img/catalog/eam.png" alt="«Галактика EAM»">
+          <img class="catalog-img product-img" src="@/assets/img/catalog/eam.png" alt="«Галактика EAM»">
         </div>
       </div>
     </div>

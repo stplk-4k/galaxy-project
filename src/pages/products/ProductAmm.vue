@@ -43,7 +43,7 @@
 
         </div>
         <div class="col-3">
-          <img class="catalog-img " src="@/assets/img/catalog/amm.png" alt="«Галактика AMM»">
+          <img class="catalog-img product-img" src="@/assets/img/catalog/amm.png" alt="«Галактика AMM»">
         </div>
       </div>
     </div>

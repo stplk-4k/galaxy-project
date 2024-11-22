@@ -420,6 +420,11 @@ h4 {
     margin-bottom: 30px;
 }
 
+.product-img {
+    border: 3px solid var(--g-light);
+    border-radius: 25px;
+}
+
 /* CONTACTS */
 
 .contacts-p {

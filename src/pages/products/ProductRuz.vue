@@ -50,7 +50,7 @@
 
         </div>
         <div class="col-3">
-          <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/ruz.png" alt="«Галактика RUZ»">
+          <img class="catalog-img product-img catalog-img-size" src="@/assets/img/catalog/ruz.png" alt="«Галактика RUZ»">
         </div>
       </div>
     </div>

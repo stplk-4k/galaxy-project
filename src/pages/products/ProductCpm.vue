@@ -44,7 +44,7 @@
           </router-link>
         </div>
         <div class="col-3">
-          <img class="catalog-img " src="@/assets/img/catalog/cpm.png" alt="«Галактика CPM»">
+          <img class="catalog-img product-img" src="@/assets/img/catalog/cpm.png" alt="«Галактика CPM»">
         </div>
       </div>
     </div>
