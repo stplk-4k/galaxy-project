@@ -348,7 +348,7 @@ h3 {
 
 .product-h2 {
     font-size: 30px;
-    margin-left: 10px;
+
 }
 .product-h-name {
     font-size: 25px;
@@ -403,4 +403,8 @@ h3 {
     background: var(--g-light);
     border: var(--g-blue) 1px solid;
     color: var(--g-blue);
+}
+
+.product-row {
+    margin-bottom: 30px;
 }

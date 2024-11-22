@@ -2,8 +2,8 @@
   <div class="product">
     <div class="container">
       <h2 class="product-h2">Подробное описание услуги</h2>
-      <div class="row catalog-row">
-        <div class="col-9 catalog-text">
+      <div class="row product-row">
+        <div class="col-9 ">
           <h3 class="product-h-name">
             «Галактика ELMS»
           </h3>
