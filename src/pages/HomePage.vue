@@ -10,7 +10,10 @@
                             лидеров на
                             ИТ-рынке
                         </p>
-                        <button type="button" class="btn btn-primary">Подробнее</button>
+                        <router-link to="/about">
+                            <button type="button" class="btn btn-primary">Подробнее</button>
+                        </router-link>
+                        
                     </div>
                     <div class="col-sm-6">
                         <a href="/img/bg_main.jpg" target="_blank">
@@ -27,7 +30,10 @@
                             "Галактика ERP" помогает эффективно решать текущие и стратегические управленческие задачи
                             современного предприятия
                         </p>
-                        <button type="button" class="btn btn-primary">Подробнее</button>
+                        <router-link to="/product-erp">
+                            <button type="button" class="btn btn-primary">Подробнее</button>
+                        </router-link>
+
                     </div>
                     <div class="col-sm-6">
                         <a href="/img/bg_main.jpg" target="_blank">
@@ -44,7 +50,10 @@
                             "Галактика АММ" помогает построить прибыльный и эффективный производственный процесс на
                             любом предприятии
                         </p>
-                        <button type="button" class="btn btn-primary">Подробнее</button>
+                        <router-link to="/product-amm">
+                            <button type="button" class="btn btn-primary">Подробнее</button>
+                        </router-link>
+                        
                     </div>
                     <div class="col-sm-6">
                         <a href="/img/bg_main.jpg" target="_blank">

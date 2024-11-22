@@ -54,7 +54,6 @@ body {
 }
 .logo-text {
     font-size: 30px;
-    margin-top: 15px;
     text-align: center;
     padding-bottom: 15px;
 }
@@ -124,12 +123,17 @@ body {
     list-style: none;
     align-items: center;
     margin-bottom: 30px;
+    
 }
 
 .menu-ul li a {
     text-decoration: none;
     color: var(--g-blue);
     font-size: 18px;
+}
+
+.menu-ul li a:hover {
+    text-decoration: underline;
 }
 
 /* SIDEBAR */
@@ -145,6 +149,9 @@ body {
     text-decoration: none;
     color: var(--g-blue);
     font-size: 18px;
+}
+.sidebar-ul li a:hover {
+    text-decoration: underline;
 }
 
 .sidebar-ul li {
