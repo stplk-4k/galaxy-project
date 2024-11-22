@@ -7,6 +7,10 @@
     --g-blue: #0060cc;
     --g-gray: #ddd;
     --g-light: #f8f8f8;
+    --g-black: #000;
+    --g-bg-header: #eaeaea;
+    --g-bg-short: #707070;
+    --g-bg-special: #484343;
 }
 
 @font-face {
@@ -338,4 +342,65 @@ h3 {
 }
 .catalog-img-size {
     width: 100px;
+}
+
+/* PRODUCT */
+
+.product-h2 {
+    font-size: 30px;
+    margin-left: 10px;
+}
+.product-h-name {
+    font-size: 25px;
+    color: var(--g-blue);
+    margin-bottom: 40px;
+}
+
+.product-h {
+    color: var(--g-black);
+    font-size: 18px;
+    font-weight: 400;
+    background: var(--g-bg-header);
+    margin-bottom: 30px;
+}
+
+.product-short {
+    color: var(--g-bg-short);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+    margin-bottom: 50px;
+}
+
+.product-detailed {
+    color: var(--g-bg-special);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.product-speial {
+    list-style: url(../img/icons/check16.png);
+    font-size: 14px;
+    margin-bottom: 50px;
+}
+
+.product-speial li {
+    margin-bottom: 5px;
+    width: 500px;
+}
+
+.btn-secondary {
+    margin-left: 30px;
+    background: var(--g-gray);
+    border: var(--g-blue) 1px solid;
+    color: var(--g-blue);
+}
+
+.btn-secondary:hover {
+    background: var(--g-light);
+    border: var(--g-blue) 1px solid;
+    color: var(--g-blue);
 }
