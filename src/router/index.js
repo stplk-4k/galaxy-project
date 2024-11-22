@@ -10,7 +10,6 @@ import ProductAmm from '../pages/products/ProductAmm.vue';
 import ProductCpm from '@/pages/products/ProductCpm.vue';
 import ProductEam from '@/pages/products/ProductEam.vue';
 import ProductErp from '@/pages/products/ProductErp.vue';
-import ProductHcm from '@/pages/products/ProductHcm.vue';
 import ProductEcm from '@/pages/products/ProductEcm.vue';
 import ProductEsb from '@/pages/products/ProductEsb.vue';
 import ProductMes from '@/pages/products/ProductMes.vue';
@@ -30,7 +29,6 @@ const routes = [
     { path: '/product-cpm', name: 'ProductCpm', component: ProductCpm },
     { path: '/product-eam', name: 'ProductEam', component: ProductEam },
     { path: '/product-erp', name: 'ProductErp', component: ProductErp },
-    { path: '/product-hcm', name: 'ProductHcm', component: ProductHcm },
     { path: '/product-ecm', name: 'ProductEcm', component: ProductEcm },
     { path: '/product-esb', name: 'ProductEsb', component: ProductEsb },
     { path: '/product-mes', name: 'ProductMes', component: ProductMes },

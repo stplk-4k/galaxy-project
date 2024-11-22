@@ -70,37 +70,7 @@
           </div>
         </div>
         <!-- 5 -->
-        <div class="catalog-row-space">
-          <div class="row catalog-row">
-            <div class="col-9 catalog-text">
-              <h3 class="catalog-h">
-                <router-link to="/product-hcm">«Галактика HCM»</router-link>
-              </h3>
-              <p>Эффективно управляйте сотрудниками и повышайте их эффективность</p>
-            </div>
-            <div class="col-3">
-              <router-link to="/product-hcm">
-                <img class="catalog-img " src="@/assets/img/catalog/hcm.png" alt="«Галактика HCM»">
-              </router-link>
-            </div>
-          </div>
-        </div>
         <!-- 6 -->
-        <div class="catalog-row-space">
-          <div class="row catalog-row">
-            <div class="col-9 catalog-text">
-              <h3 class="catalog-h">
-                <router-link to="/product-mcm">«Галактика MCM»</router-link>
-              </h3>
-              <p>Упрощайте планирование производства связанных между собой предприятий</p>
-            </div>
-            <div class="col-3">
-              <router-link to="/product-mcm">
-                <img class="catalog-img " src="@/assets/img/catalog/mcm.png" alt="«Галактика MCM»">
-              </router-link>
-            </div>
-          </div>
-        </div>
         <!-- 7 -->
         <div class="catalog-row-space">
           <div class="row catalog-row">
