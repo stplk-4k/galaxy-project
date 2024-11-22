@@ -179,7 +179,7 @@
               <router-link to="/product-elms">
                 <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/elms.png" alt="«Галактика eLMS»">
               </router-link>
-
+              
             </div>
           </div>
         </div>
