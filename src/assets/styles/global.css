@@ -173,6 +173,10 @@ h3 {
     font-weight: 600;
 }
 
+h4 {
+    font-size: 22px;
+}
+
 .main-img {
     width: 350px;
     height: auto;
@@ -407,4 +411,107 @@ h3 {
 
 .product-row {
     margin-bottom: 30px;
+}
+
+/* CONTACTS */
+
+.contacts-p {
+    margin-right: 30px;
+}
+
+.contacts-h3 {
+    color: var(--g-blue);
+    margin-bottom: 30px;
+}
+.contacts-h4 {
+    margin-bottom: 25px;
+}
+
+.contacts-map {
+    margin: 30px 0 30px 0;
+}
+
+.contacts-a {
+    text-decoration: none;
+    color: var(--g-blue);
+}
+.contacts-a:hover {
+    text-decoration: underline;
+}
+
+.form-contact-header {
+    margin-bottom: 40px;
+    color: var(--g-blue);
+}
+
+.form-contact-input {
+    margin-bottom: 15px;
+    width: 300px;
+    margin-left: 60px;
+    height: 30px;
+    color:#0060cc;
+    font-size: 16px;
+    font-style: italic;
+    padding-left: 30px;
+    font-family: mr;
+    border-radius: 5px;
+    border: 0;
+}
+
+.form-contact-topic {
+    margin: 0 0 30px 5px;
+}
+
+.form-contact-textarea {
+    width: 300px;
+    margin: -10px 0 30px 3px;
+    padding: 10px 0 0 30px;
+    font-size: 16px;
+    font-style: italic;
+    font-family: mr;
+    height: 100px;
+    vertical-align: top;
+    border-radius: 5px;
+    border: 0;
+    color:#0060cc;
+}
+
+.form-contact-check {
+    margin: 0 0 30px 20px;
+}
+.form-contact-check > label {
+    margin-left: 10px;
+}
+
+.form-contact-btn {
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid var(--g-blue);
+    color: var(--g-blue);
+    font-size: 16px;
+    font-family: mr;
+    margin: 0 0 30px 80px;
+
+}
+
+.form-contact-btn:hover {
+    background: var(--g-blue);
+    color: #eaeaea;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contacts-ul > li > a {
+    text-decoration: none;
+    color: var(--g-black);
+}
+
+.contacts-ul > li > a:hover {
+    color: var(--g-blue);
+}
+
+.contacts-ul > li {
+    list-style: none;
+    
 }
