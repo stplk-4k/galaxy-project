@@ -299,6 +299,43 @@ h3 {
 
 /* CATALOG */
 
+.catalog-row {
+    display:table-row;
+    margin-bottom: 30px;
+}
+
+.catalog-row-space {
+    margin-bottom: 30px;
+}
+
+.catalog-text {
+    display:table-cell; 
+    vertical-align:middle;
+    margin-right: 30px;
+}
+
+
 .catalog-img {
     margin-left: 30px;
+}
+
+.catalog-h > a {
+    color: var(--g-blue);
+}
+
+.catalog-h > a:hover {
+    color: #000;
+}
+
+.catalog-text {
+    margin-bottom: 40px;
+}
+
+.catalog-img-block {
+    display: flex;
+    height: 100px;
+    margin-left: 36px;
+}
+.catalog-img-size {
+    width: 100px;
 }
