@@ -3,6 +3,24 @@
     <div class="container">
       <h2>Отзывы</h2>
 
+      <div class="swiper-container">
+        <swiper ref="swiperRef" :options="swiperOptions" @swiper="setSwiperRef">
+          <swiper-slide v-for="review in reviews" :key="review.id">
+            <div class="review-slide">
+              <h3 class='review-slide-feedback'> {{ review.review }} </h3>
+              <p>Автор отзыва: <i class='review-slide-text'> {{ review.name }} </i></p>
+              <p>Город: <i class='review-slide-text'>{{ review.city }} </i></p>
+
+            </div>
+          </swiper-slide>
+        </swiper>
+
+        <div class="swiper-button-prev" @click="slidePrev"></div>
+        <div class="swiper-button-next" @click="slideNext"></div>
+      </div>
+
+      <h2>Оставьте и вы отзыв!</h2>
+
       <div class="feedback-form">
 
         <form @submit.prevent="submitForm">
@@ -72,17 +90,10 @@
           <button type="submit" class="btn btn-primary">Оставить отзыв</button>
         </form>
 
-        <h2>Введенные данные:</h2>
-        <pre>{{ formData }}</pre>
+        <!-- <h2>Введенные данные:</h2>
+        <pre>{{ formData }}</pre> -->
 
       </div>
-
-      <h2>Отзывы:</h2>
-      <ul>
-        <li v-for="review in reviews" :key="review.id">
-          <strong>{{ review.name }}:</strong> {{ review.review }} ({{ review.gender }}, {{ review.city }})
-        </li>
-      </ul>
     </div>
   </div>
 </template>
@@ -90,9 +101,12 @@
 <script>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
 
 export default {
   name: 'FeedbackPage',
+  components: { Swiper, SwiperSlide },
   meta: {
     title: 'Отзывы - Корпорация «Галактика»'
   },
@@ -109,6 +123,15 @@ export default {
     });
 
     const reviews = ref([]);
+    const swiperRef = ref(null);
+    const swiperInstance = ref(null);
+
+    const swiperOptions = {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    };
     const cities = ref([
       'Москва',
       'Санкт-Петербург',
@@ -156,12 +179,34 @@ export default {
       'Севастополь',
     ]);
 
+    function setSwiperRef(swiper) {
+      swiperInstance.value = swiper;
+    }
+
+    function slidePrev() {
+      if (swiperInstance.value) {
+        swiperInstance.value.slidePrev();
+      }
+    }
+
+    function slideNext() {
+      if (swiperInstance.value) {
+        swiperInstance.value.slideNext();
+      }
+    }
+
     async function fetchReviews() {
       try {
         const response = await axios.get('http://localhost:3000/api/reviews');
         reviews.value = response.data;
       } catch (error) {
-        console.error(error);
+        if (error.response) {
+          console.error('Error response:', error.response);
+        } else if (error.request) {
+          console.error('Error request:', error.request);
+        } else {
+          console.error('Error message:', error.message);
+        }
       }
     }
 
@@ -201,7 +246,13 @@ export default {
           additionalInfo: '',
         };
       } catch (error) {
-        console.error(error);
+        if (error.response) {
+          console.error('Error response:', error.response);
+        } else if (error.request) {
+          console.error('Error request:', error.request);
+        } else {
+          console.error('Error message:', error.message);
+        }
       }
     }
 
@@ -213,9 +264,15 @@ export default {
     return {
       formData,
       reviews,
+      // swipкer,
+      swiperOptions,
       cities,
       cityChanged,
       submitForm,
+      swiperRef,
+      slidePrev,
+      slideNext,
+      setSwiperRef,
     };
   },
 };

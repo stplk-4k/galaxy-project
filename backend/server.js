@@ -2,10 +2,17 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const uuid = require('uuid');
+const cors = require('cors');
 
-let reviews = [];
+app.use(cors({
+  origin: 'http://localhost:8080',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 app.use(express.json());
+
+let reviews = [];
 
 app.post('/api/reviews', (req, res) => {
   const { name, review, gender, email, city } = req.body;
