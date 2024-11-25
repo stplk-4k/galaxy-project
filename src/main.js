@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap'; // для js
 import './assets/styles/global.css';
 import axios from 'axios';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const app = createApp(App);
 const metaManager = createMetaManager();

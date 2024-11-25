@@ -103,6 +103,7 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'FeedbackPage',
@@ -221,7 +222,7 @@ export default {
     async function submitForm() {
       try {
         if (!formData.value.agreeToDataProcessing) {
-          alert('Необходимо согласие на обработку персональных данных');
+          Swal.fire('Ошибка!', 'Необходимо согласие на обработку персональных данных', 'error');
           return;
         }
         const reviewData = { ...formData.value };
@@ -245,14 +246,25 @@ export default {
           otherCity: '',
           additionalInfo: '',
         };
+        Swal.fire({
+          title: 'Успешно!',
+          text: 'Ваш отзыв успешно оставлен!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc', 
+          cancelButtonText: 'Отмена',
+          cancelButtonColor: '#e74c3c',
+        });
       } catch (error) {
+        let errorMessage = 'Произошла ошибка при отправке отзыва.';
         if (error.response) {
-          console.error('Error response:', error.response);
+          errorMessage = error.response.data.message || 'Серверная ошибка.';
         } else if (error.request) {
-          console.error('Error request:', error.request);
+          errorMessage = 'Ошибка соединения с сервером.';
         } else {
-          console.error('Error message:', error.message);
+          errorMessage = error.message;
         }
+        Swal.fire('Ошибка!', errorMessage, 'error');
       }
     }
 
