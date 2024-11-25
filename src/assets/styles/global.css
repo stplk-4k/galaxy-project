@@ -526,3 +526,76 @@ h4 {
     list-style: none;
     
 }
+
+/* FEEDBACK */
+
+.feedback-name {
+    margin-bottom: 30px;
+}
+
+/* .feedback-name input {
+
+} */
+
+.feedback-text {
+    margin-left: -5px;
+}
+
+.feedback-text .form-contact-topic {
+    margin-right: 60px;
+}
+
+.feedback-gender-checkbox {
+    margin: -25px 0 30px 160px;
+}
+
+.feedback-city select {
+    margin-left: 63px;
+    margin-bottom: 30px;
+    width: 300px;
+    height: 30px;
+    color:#0060cc;
+    font-size: 16px;
+    font-style: italic;
+    padding-left: 30px;
+    font-family: mr;
+    border-radius: 5px;
+    border: 0;
+}
+
+.feedback-city .other-city-input {
+    width: 300px;
+    height: 30px;
+    color:#0060cc;
+    font-size: 16px;
+    font-style: italic;
+    padding-left: 30px;
+    font-family: mr;
+    border-radius: 5px;
+    border: 0;
+    margin: 0 0 30px 155px;
+}
+
+.form-switch {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.feedback-checkbox-email {
+    width: 300px;
+    height: 30px;
+    color:#0060cc;
+    font-size: 16px;
+    font-style: italic;
+    padding-left: 30px;
+    font-family: mr;
+    border-radius: 5px;
+    border: 0;
+    margin-left: 67px;
+    margin-bottom: 20px;
+}
+
+.feedback-checkbox-data {
+    margin-bottom: 50px;
+    margin-left: 20px;
+}
