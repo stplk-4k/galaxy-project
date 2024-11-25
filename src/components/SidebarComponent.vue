@@ -12,6 +12,9 @@
                     <li>
                         <router-link to="/team">Сотрудники</router-link>
                     </li>
+                    <li>
+                        <router-link to="/feedback">Отзывы</router-link>
+                    </li>
                 </ul>
             </div>
         </div>

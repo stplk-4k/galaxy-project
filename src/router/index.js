@@ -16,6 +16,7 @@ import ProductMes from '@/pages/products/ProductMes.vue';
 import ProductVuz from '@/pages/products/ProductVuz.vue';
 import ProductElms from '@/pages/products/ProductElms.vue';
 import ProductRuz from '@/pages/products/ProductRuz.vue';
+import FeedbackPage from '@/pages/FeedbackPage.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -35,6 +36,7 @@ const routes = [
     { path: '/product-vuz', name: 'ProductVuz', component: ProductVuz },
     { path: '/product-elms', name: 'ProductElms', component: ProductElms },
     { path: '/product-ruz', name: 'ProductRuz', component: ProductRuz },
+    { path: '/feedback', name: 'FeedbackPage', component: FeedbackPage },
 
   ];
   

@@ -17,17 +17,17 @@
                                         <label for="inputLogin" class="col-form-label header-form-label">Логин</label>
                                     </div>
                                     <div class="col-auto ">
-                                        <input type="text" id="inputPassword6" class="form-control"
+                                        <input type="text" id="inputLogin" class="form-control"
                                             aria-describedby="passwordHelpInline">
                                     </div>
                                 </div>
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <label for="inputPassword6"
+                                        <label for="inputPassword"
                                             class="col-form-label header-form-label">Пароль</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="password" id="inputPassword6" class="form-control"
+                                        <input type="password" id="inputPassword" class="form-control"
                                             aria-describedby="passwordHelpInline">
                                     </div>
                                 </div>
