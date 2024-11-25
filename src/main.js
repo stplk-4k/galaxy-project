@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store'; // Vuex хранилище
-import { createMetaManager } from 'vue-meta'
+import { createMetaManager } from 'vue-meta';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap'; // для js
 import './assets/styles/global.css';

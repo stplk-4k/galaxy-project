@@ -52,17 +52,19 @@
 
           <div class="feedback-checkbox">
             <div class="form-check form-switch">
-              <input  v-model="formData.newsletter" class="form-check-input " type="checkbox" id="news">
+              <input v-model="formData.newsletter" class="form-check-input " type="checkbox" id="news">
               <label class="form-check-label" for="news">Подписаться на рассылку</label>
             </div>
 
             <div v-if="formData.newsletter">
               <label>Ваш email:</label>
-              <input placeholder="myEmail@gmail.com" v-model="formData.email" class="feedback-checkbox-email" type="email" required />
+              <input placeholder="myEmail@gmail.com" v-model="formData.email" class="feedback-checkbox-email"
+                type="email" required />
             </div>
 
             <label>
-              <input v-model="formData.agreeToDataProcessing" type="checkbox" role="switch" class="feedback-checkbox-data" required />
+              <input v-model="formData.agreeToDataProcessing" type="checkbox" role="switch"
+                class="feedback-checkbox-data" required />
               Согласен(а) на обработку персональных данных
             </label>
           </div>
@@ -75,12 +77,18 @@
 
       </div>
 
+      <h2>Отзывы:</h2>
+      <ul>
+        <li v-for="review in reviews" :key="review.id">
+          <strong>{{ review.name }}:</strong> {{ review.review }} ({{ review.gender }}, {{ review.city }})
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 export default {
@@ -98,9 +106,9 @@ export default {
       email: '',
       city: '',
       otherCity: '',
-      additionalInfo: '',
     });
 
+    const reviews = ref([]);
     const cities = ref([
       'Москва',
       'Санкт-Петербург',
@@ -148,6 +156,15 @@ export default {
       'Севастополь',
     ]);
 
+    async function fetchReviews() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/reviews');
+        reviews.value = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     function cityChanged() {
       if (formData.value.city === 'other') {
         formData.value.otherCity = '';
@@ -162,15 +179,40 @@ export default {
           alert('Необходимо согласие на обработку персональных данных');
           return;
         }
-        const response = await axios.post('/api/reviews', formData.value);
-        console.log('Форма отправлена:', response.data);
+        const reviewData = { ...formData.value };
+        if (reviewData.city === 'other') {
+          reviewData.city = reviewData.otherCity;
+          delete reviewData.otherCity;
+        }
+        if (!reviewData.newsletter) {
+          delete reviewData.email;
+        }
+        const response = await axios.post('http://localhost:3000/api/reviews', reviewData);
+        reviews.value.push(response.data);
+        formData.value = {
+          name: '',
+          review: '',
+          gender: '',
+          agreeToDataProcessing: false,
+          newsletter: false,
+          email: '',
+          city: '',
+          otherCity: '',
+          additionalInfo: '',
+        };
       } catch (error) {
         console.error(error);
       }
     }
 
+    onMounted(() => {
+      fetchReviews();
+    });
+
+
     return {
       formData,
+      reviews,
       cities,
       cityChanged,
       submitForm,
