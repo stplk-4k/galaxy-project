@@ -33,12 +33,13 @@
                                 </div>
                                 <div class="row mt-3 header-buttons">
                                     <div class="col-auto">
-                                        <button type="button" class="btn btn-link btn-header">Регистрация</button>
+                                        <router-link to="/registration">
+                                            <button type="button" class="btn btn-link btn-header">Регистрация</button>
+                                        </router-link>
                                     </div>
                                     <div class="col-auto">
                                         <button type="submit" class="btn btn-primary btn-header">Войти</button>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -48,7 +49,7 @@
         </div>
     </header>
 
-    
+
 </template>
 
 <script setup>

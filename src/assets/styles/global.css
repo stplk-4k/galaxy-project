@@ -346,7 +346,7 @@ h4 {
 }
 
 .catalog-h>a:hover {
-    color: #000;
+    color: var(--g-black);
 }
 
 .catalog-text {
@@ -472,7 +472,7 @@ h4 {
     width: 300px;
     margin-left: 60px;
     height: 30px;
-    color: #0060cc;
+    color: var(--g-blue);
     font-size: 16px;
     font-style: italic;
     padding-left: 30px;
@@ -496,7 +496,7 @@ h4 {
     vertical-align: top;
     border-radius: 5px;
     border: 0;
-    color: #0060cc;
+    color: var(--g-blue);
 }
 
 .form-contact-check {
@@ -521,7 +521,7 @@ h4 {
 
 .form-contact-btn:hover {
     background: var(--g-blue);
-    color: #eaeaea;
+    color: var(--g-bg-header);
     cursor: pointer;
     transition: 0.3s;
 }
@@ -567,7 +567,7 @@ h4 {
     margin-bottom: 30px;
     width: 300px;
     height: 30px;
-    color: #0060cc;
+    color: var(--g-blue);
     font-size: 16px;
     font-style: italic;
     padding-left: 30px;
@@ -579,7 +579,7 @@ h4 {
 .feedback-city .other-city-input {
     width: 300px;
     height: 30px;
-    color: #0060cc;
+    color: var(--g-blue);
     font-size: 16px;
     font-style: italic;
     padding-left: 30px;
@@ -597,7 +597,7 @@ h4 {
 .feedback-checkbox-email {
     width: 300px;
     height: 30px;
-    color: #0060cc;
+    color: var(--g-blue);
     font-size: 16px;
     font-style: italic;
     padding-left: 30px;
@@ -621,8 +621,8 @@ h4 {
 
 .review-slide {
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    background-color: var(--g-light);
+    border: 1px solid var(--g-gray);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 650px;
@@ -667,3 +667,35 @@ h4 {
     font-size: 24px;
 }
 
+/* REGISTRATION */
+
+.form-reg-name {
+    margin-left: 100px;
+}
+
+.form-reg-login {
+ margin-left: 26px;
+}
+
+.form-reg-pass {
+    margin-left: 18px;
+    margin-bottom: 30px;
+}
+
+.form-reg-email {
+    margin-left: 100px;
+}
+
+.btn-reg {
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+.btn-enter {
+    margin-left: 80px;
+    margin-right: 30px;
+}
+
+.form-registration {
+    margin-bottom: 20px;
+}
