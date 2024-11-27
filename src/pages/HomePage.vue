@@ -16,7 +16,7 @@
                         
                     </div>
                     <div class="col-sm-6">
-                        <a href="/img/bg_main.jpg" target="_blank">
+                        <a>
                             <img class="main-img" src="@/assets/img/bg_main.jpg">
                         </a>
                     </div>
@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="col-sm-6">
-                        <a href="/img/bg_main.jpg" target="_blank">
+                        <a>
                             <img class="main-img" src="@/assets/img/bg_erp.jpg">
                         </a>
                     </div>
@@ -56,7 +56,7 @@
                         
                     </div>
                     <div class="col-sm-6">
-                        <a href="/img/bg_main.jpg" target="_blank">
+                        <a>
                             <img class="main-img" src="@/assets/img/bg_amm.jpg">
                         </a>
                     </div>
