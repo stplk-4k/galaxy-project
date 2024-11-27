@@ -247,6 +247,7 @@ h4 {
     height: auto;
     display: table-cell;
     vertical-align: middle;
+    border-radius: 25px;
 }
 
 .main-row {
