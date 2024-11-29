@@ -96,7 +96,7 @@
               </h3>
               <p>Получайте все бизнес-данные в едином информационном пространстве</p>
             </div>
-            <div class="col-3">
+            <div class="col-3 catalog-img-block">
               <router-link to="/product-esb">
                 <img class="catalog-img " src="@/assets/img/catalog/esb.png" alt="«Галактика ESB»<">
               </router-link>
@@ -129,7 +129,7 @@
               </h3>
               <p>Управляйте учебным процессом и научной деятельностью университета</p>
             </div>
-            <div class="col-3">
+            <div class="col-3 catalog-img-block">
               <router-link to="/product-vuz">
                 <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/vuz.png" alt="«Галактика ВУЗ»">
               </router-link>

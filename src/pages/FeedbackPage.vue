@@ -276,7 +276,6 @@ export default {
     return {
       formData,
       reviews,
-      // swipкer,
       swiperOptions,
       cities,
       cityChanged,
