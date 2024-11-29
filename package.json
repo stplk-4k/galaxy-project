@@ -14,10 +14,10 @@
     "express": "^4.21.1",
     "sweetalert2": "^11.14.5",
     "swiper": "^11.1.15",
+    "tapable": "^2.2.1",
     "vue": "^3.2.13",
     "vue-meta": "^3.0.0-alpha.2",
-    "vue-router": "^4.4.5",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
