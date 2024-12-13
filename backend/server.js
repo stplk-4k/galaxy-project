@@ -3,7 +3,6 @@ const app = express();
 const port = 3000;
 const uuid = require('uuid');
 const cors = require('cors');
-// const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const sqlite3 = require('sqlite3').verbose();
@@ -35,16 +34,15 @@ const prod_db = new sqlite3.Database('./products.db', (err) => {
 
 app.get('/api/product/:id', (req, res) => {
   const id = req.params.id;
-  // console.log(`Fetching product with ID: ${id}`); // Логируем ID
   prod_db.get('SELECT * FROM products WHERE id = ?', [id], (err, row) => {
       if (err) {
-          console.error("Database error:", err.message); // Логируем ошибку
+          console.error("Database error:", err.message); 
           res.status(500).send(err.message);
       } else if (!row) {
-          console.log(`No product found with ID: ${id}`); // Логируем отсутствие продукта
+          console.log(`No product found with ID: ${id}`); 
           res.status(404).send("Product not found");
       } else {
-          console.log("Product found:", row); // Логируем найденный продукт
+          console.log("Product found:", row); 
           res.json(row);
       }
   });
