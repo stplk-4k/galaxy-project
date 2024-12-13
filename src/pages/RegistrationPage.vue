@@ -30,7 +30,7 @@
               
               Согласен(а) на обработку персональных данных</label>
           </div>
-          
+
           <button class="btn btn-primary btn-reg">Зарегистрироваться</button>
           <router-link to="/enter">
             <button type="button" class="btn btn-link ">Уже зарегистрирован</button>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { ref } from 'vue';
 
 export default {
@@ -54,22 +55,26 @@ export default {
     const username = ref('');
     const email = ref('');
     const password = ref('');
-    const agree = ref(false);
     const errors = ref({});
 
-    const validateForm = () => {
+    const register = async () => {
       errors.value = {};
       if (!username.value) errors.value.username = 'Логин обязателен';
       if (!email.value) errors.value.email = 'Email обязателен';
       if (!password.value) errors.value.password = 'Пароль обязателен';
-      if (!agree.value) errors.value.agree = 'Необходимо согласие на обработку данных';
-      
-      return Object.keys(errors.value).length === 0;
-    };
 
-    const register = () => {
-      if (validateForm()) {
-        console.log('Регистрация успешна', { name: name.value, username: username.value, email: email.value, password: password.value });
+      if (Object.keys(errors.value).length === 0) {
+        try {
+          await axios.post('http://localhost:3000/api/register', {
+            name: name.value,
+            username: username.value,
+            email: email.value,
+            password: password.value,
+          });
+          alert('Регистрация успешна!');
+        } catch (error) {
+          alert(error.response.data.message);
+        }
       }
     };
 
@@ -78,11 +83,10 @@ export default {
       username,
       email,
       password,
-      agree,
       errors,
-      register
+      register,
     };
-  }
+  },
 };
 // export default {
 //   name: 'RegistrationPage',

@@ -5,7 +5,8 @@ const uuid = require('uuid');
 const cors = require('cors');
 // const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const users = [];
 
@@ -18,31 +19,61 @@ app.use(cors({
 app.use(express.json());
 app.use(bodyParser.json());
 
+const db = new sqlite3.Database('./users.db', (err) => {
+  if (err) {
+      console.error(err.message);
+  }
+  console.log('Подключено к базе данных SQLite.');
+});
+
+// db.run(`CREATE TABLE IF NOT EXISTS users (
+//   id INTEGER PRIMARY KEY AUTOINCREMENT,
+//   name TEXT,
+//   username TEXT UNIQUE,
+//   email TEXT UNIQUE,
+//   password TEXT
+// )`);
+
 app.post('/api/register', async (req, res) => {
   const { name, username, email, password } = req.body;
-  
-  // Проверка на существование пользователя
-  const existingUser = users.find(user => user.username === username);
-  if (existingUser) return res.status(400).json({ message: 'Пользователь уже существует' });
 
-  // Хеширование пароля
-  const hashedPassword = await bcrypt.hash(password, 10);
-  
-  users.push({ name, username, email, password: hashedPassword });
-  
-  res.status(201).json({ message: 'Регистрация успешна' });
+  try {
+      // Проверка существования пользователя
+      db.get(`SELECT * FROM users WHERE username = ?`, [username], async (err, row) => {
+          if (row) {
+              return res.status(400).json({ message: 'Пользователь уже существует' });
+          }
+
+          // Хеширование пароля
+          const hashedPassword = await bcrypt.hash(password, 10);
+          db.run(`INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)`, 
+              [name, username, email, hashedPassword], 
+              function(err) {
+                  if (err) {
+                      console.error(err.message); // Вывод ошибки в консоль
+                      return res.status(500).json({ message: 'Ошибка сервера' });
+                  }
+                  res.status(201).json({ message: 'Регистрация успешна', userId: this.lastID });
+              });
+      });
+  } catch (error) {
+      console.error(error); // Вывод ошибки в консоль
+      res.status(500).json({ message: 'Ошибка сервера' });
+  }
 });
+
 
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
-  
-  const user = users.find(user => user.username === username);
-  
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ message: 'Неверный логин или пароль' });
-  }
-  
-  res.json({ message: 'Вход успешен' });
+
+  db.get(`SELECT * FROM users WHERE username = ?`, [username], async (err, user) => {
+      if (!user || !(await bcrypt.compare(password, user.password))) {
+          return res.status(401).json({ message: 'Неверный логин или пароль' });
+      }
+
+      const token = jwt.sign({ id: user.id }, 'secret_key', { expiresIn: '1h' });
+      res.json({ token });
+  });
 });
 // const db = mysql.createPool({
 //   host: 'localhost',

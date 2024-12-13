@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { ref } from 'vue';
 
 export default {
@@ -38,17 +39,23 @@ export default {
     const password = ref('');
     const errors = ref({});
 
-    const validateForm = () => {
+    const login = async () => {
       errors.value = {};
       if (!username.value) errors.value.username = 'Логин обязателен';
       if (!password.value) errors.value.password = 'Пароль обязателен';
-      
-      return Object.keys(errors.value).length === 0;
-    };
 
-    const login = () => {
-      if (validateForm()) {
-        console.log('Вход успешен', { username: username.value, password: password.value });
+      if (Object.keys(errors.value).length === 0) {
+        try {
+          const response = await axios.post('http://localhost:3000/api/login', {
+            username: username.value,
+            password: password.value,
+          });
+          alert('Вход успешен!');
+          // Здесь вы можете сохранить токен или выполнить другие действия
+          console.log(response.data.token); // Сохраните токен для дальнейшего использования
+        } catch (error) {
+          alert(error.response.data.message);
+        }
       }
     };
 
@@ -56,9 +63,9 @@ export default {
       username,
       password,
       errors,
-      login
+      login,
     };
-  }
+  },
 };
 
 // export default {
