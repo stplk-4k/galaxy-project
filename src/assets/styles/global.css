@@ -68,6 +68,19 @@ body {
     justify-content: end;
 }
 
+.header-form-true {
+    margin: 25px 50px 25px 0;
+}
+
+.header-form-btn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-header-exit {
+    margin-right: 50px;
+}
+
 .header-form {
     margin-right: 40px;
 }
@@ -753,4 +766,18 @@ h4 {
 
 .form-registration {
     margin-bottom: 20px;
+}
+
+.btn-enter-true {
+    margin-right: 30px;
+}
+
+/* ACCOUNT */
+
+.account-buttons {
+    margin-top: 50px;
+}
+
+.btn-account {
+    margin-right: 30px;
 }

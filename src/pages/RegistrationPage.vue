@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { ref } from 'vue';
+import axios from 'axios';
 
 export default {
   setup() {
@@ -55,6 +55,7 @@ export default {
     const username = ref('');
     const email = ref('');
     const password = ref('');
+    const agree = ref(false);
     const errors = ref({});
 
     const register = async () => {
@@ -62,8 +63,12 @@ export default {
       if (!username.value) errors.value.username = 'Логин обязателен';
       if (!email.value) errors.value.email = 'Email обязателен';
       if (!password.value) errors.value.password = 'Пароль обязателен';
+      if (!agree.value) {
+        alert('Необходимо согласие на обработку персональных данных.');
+        return;
+      }
 
-      if (Object.keys(errors.value).length === 0) {
+      if (Object.keys(errors.value).length === 0 && agree.value) {
         try {
           await axios.post('http://localhost:3000/api/register', {
             name: name.value,
@@ -71,7 +76,14 @@ export default {
             email: email.value,
             password: password.value,
           });
+
           alert('Регистрация успешна!');
+
+          // Сохранение логина в localStorage
+          localStorage.setItem('username', username.value);
+
+          // Перенаправление на страницу личного кабинета
+          window.location.href = '/account'; // Используем window.location.href
         } catch (error) {
           alert(error.response.data.message);
         }
@@ -83,6 +95,7 @@ export default {
       username,
       email,
       password,
+      agree,
       errors,
       register,
     };

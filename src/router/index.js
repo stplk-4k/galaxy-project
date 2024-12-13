@@ -19,6 +19,7 @@ import ProductRuz from '@/pages/products/ProductRuz.vue';
 import FeedbackPage from '@/pages/FeedbackPage.vue';
 import RegistrationPage from '@/pages/RegistrationPage.vue';
 import EnterPage from '@/pages/EnterPage.vue';
+import AccountPage from '@/pages/AccountPage.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -41,7 +42,7 @@ const routes = [
     { path: '/feedback', name: 'FeedbackPage', component: FeedbackPage },
     { path: '/registration', name: 'RegistrationPage', component: RegistrationPage },
     { path: '/enter', name: 'EnterPage', component: EnterPage },
-
+    { path: '/account', name: 'AccountPage', component: AccountPage },
   ];
   
   const router = createRouter({

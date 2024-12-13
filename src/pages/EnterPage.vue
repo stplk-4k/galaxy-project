@@ -4,7 +4,7 @@
       <h2>Вход</h2>
 
       <div class="form-registration">
-        <form @submit.prevent="login">
+        <form @submit.prevent="login" v-if="!isLoggedIn">
           <label>Ваш логин:
             <input v-model="username" type="text" placeholder="Логин" class="form-contact-input form-reg-login" />
             <span v-if="errors.username">{{ errors.username }}</span>
@@ -22,6 +22,12 @@
 
         </form>
 
+        <div v-else>
+          <h2>Здравствуйте, {{ username }}!</h2>
+          <button @click="writeReview" class="btn btn-link btn-enter-true" >Написать отзыв</button>
+          <button @click="logout" class="btn btn-primary">Выйти из аккаунта</button>
+          
+        </div>
 
       </div>
 
@@ -39,6 +45,12 @@ export default {
     const password = ref('');
     const errors = ref({});
 
+    const isLoggedIn = !!localStorage.getItem('username');
+
+    if (isLoggedIn) {
+      username.value = localStorage.getItem('username');
+    }
+
     const login = async () => {
       errors.value = {};
       if (!username.value) errors.value.username = 'Логин обязателен';
@@ -51,12 +63,26 @@ export default {
             password: password.value,
           });
           alert('Вход успешен!');
-          // Здесь вы можете сохранить токен или выполнить другие действия
-          console.log(response.data.token); // Сохраните токен для дальнейшего использования
+          localStorage.setItem('username', username.value);
+          localStorage.setItem('token', response.data.token);
+          // console.log(response.data.token); 
+          // window.location.reload();
+          window.location.href = '/account';
         } catch (error) {
           alert(error.response.data.message);
         }
       }
+    };
+
+    const logout = () => {
+      localStorage.removeItem('username');
+      localStorage.removeItem('token');
+      window.location.href = '/';
+      // window.location.reload(); // Перезагрузка страницы после выхода
+    };
+
+    const writeReview = () => {
+      window.location.href = '/write-review'; // Замените на нужный маршрут
     };
 
     return {
@@ -64,6 +90,9 @@ export default {
       password,
       errors,
       login,
+      logout,
+      writeReview,
+      isLoggedIn,
     };
   },
 };
