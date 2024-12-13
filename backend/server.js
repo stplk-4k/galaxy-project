@@ -4,9 +4,10 @@ const port = 3000;
 const uuid = require('uuid');
 const cors = require('cors');
 // const mysql = require('mysql2/promise');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const users = [];
 
 app.use(cors({
   origin: 'http://localhost:8081',
@@ -15,8 +16,34 @@ app.use(cors({
 }));
 
 app.use(express.json());
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
+app.post('/api/register', async (req, res) => {
+  const { name, username, email, password } = req.body;
+  
+  // Проверка на существование пользователя
+  const existingUser = users.find(user => user.username === username);
+  if (existingUser) return res.status(400).json({ message: 'Пользователь уже существует' });
+
+  // Хеширование пароля
+  const hashedPassword = await bcrypt.hash(password, 10);
+  
+  users.push({ name, username, email, password: hashedPassword });
+  
+  res.status(201).json({ message: 'Регистрация успешна' });
+});
+
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+  
+  const user = users.find(user => user.username === username);
+  
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({ message: 'Неверный логин или пароль' });
+  }
+  
+  res.json({ message: 'Вход успешен' });
+});
 // const db = mysql.createPool({
 //   host: 'localhost',
 //   user: 'root',
@@ -66,10 +93,6 @@ app.post('/api/reviews', (req, res) => {
   reviews.push(newReview);
   res.json(newReview);
 });
-
-// app.get('/api/reviews', (res) => {
-//   res.json(reviews);
-// });
 app.get('/api/reviews', (req, res) => {
   res.json(reviews);
 });
