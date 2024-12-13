@@ -622,6 +622,10 @@ h4 {
     margin-left: -5px;
 }
 
+.feedback-p {
+    font-size: 22px;
+}
+
 .feedback-text .form-contact-topic {
     margin-right: 60px;
 }

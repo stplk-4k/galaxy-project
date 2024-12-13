@@ -4,6 +4,106 @@
       <h2 class="product-h2">Подробное описание услуги</h2>
       <div class="row product-row">
         <div class="col-9">
+          <h3 class="product-h-name">{{ product.name }}</h3>
+          <h3 class="product-h">Краткое описание</h3>
+          <p class="product-short">{{ product.short_description }}</p>
+
+          <h3 class="product-h">Характеристики</h3>
+          <ul class="product-speial">
+            <li>Синхронное планирование и контроль работ по всему жизненному циклу изделия</li>
+            <li>Встроенные механизмы, поддерживающие современные методы управления проектами</li>
+            <li>Реализация управления производством как внутренними цепями производственных и поставочных работ (SCM)
+            </li>
+            <li>Реализация процессного подхода к управлению основным и обеспечивающим производством</li>
+            <li>Обеспечение анализа эффективности бизнес-процессов</li>
+            <li>Встроенные механизмы многомерного анализа данных</li>
+          </ul>
+
+          <h3 class="product-h">Подробное описание</h3>
+          <div class="product-detailed">
+            <p>{{ product.full_description }}</p>
+          </div>
+
+          <h3 class="product-h">Цена</h3>
+          <div class="product-detailed">
+            <p>{{ product.price }} руб.</p>
+          </div>
+
+          <a :href="product.link">
+            <button type="button" class="btn btn-primary">Узнать еще подробнее</button>
+          </a>
+          <router-link to="/catalog">
+            <button type="button" class="btn btn-secondary">Обратно в каталог</button>
+          </router-link>
+        </div>
+        <div class="col-3">
+          <img :src="getImagePath(product.image)" alt="{{ product.name }}" class="catalog-img product-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'ProductAmm',
+  data() {
+    return {
+      product: {}
+    };
+  },
+  created() {
+    this.fetchProduct();
+  },
+  methods: {
+    fetchProduct() {
+      const productId = this.$route.params.id; // Получаем ID продукта из маршрута
+      axios.get(`http://localhost:3000/api/product/${productId}`)
+        .then(response => {
+          this.product = response.data;
+          console.log(this.product); // Логируем полученные данные
+        })
+        .catch(error => {
+          console.error("Ошибка при получении продукта:", error);
+        });
+    },
+    getImagePath(image) {
+      return image ? require(`@/assets/img/catalog/${image}`) : ''; // Возвращаем пустую строку, если image не задан
+    }
+    // fetchProduct() {
+    //   const productId = 1;
+    //   axios.get(`http://localhost:3000/api/product/${productId}`)
+    //     .then(response => {
+    //       this.product = response.data;
+    //       this.product.features = [
+    //         "Синхронное планирование и контроль работ по всему жизненному циклу изделия",
+    //         "Встроенные механизмы, поддерживающие современные методы управления проектами",
+    //         "Реализация управления производством как внутренними цепями производственных и поставочных работ (SCM)",
+    //         "Реализация процессного подхода к управлению основным и обеспечивающим производством",
+    //         "Обеспечение анализа эффективности бизнес-процессов",
+    //         "Встроенные механизмы многомерного анализа данных"
+    //       ];
+    //     })
+    //     .catch(error => {
+    //       console.error("There was an error fetching the product:", error);
+    //     });
+    // },
+    // getImagePath(image) {
+    //   return require(`@/assets/img/catalog/${image}`);
+    // }
+  },
+};
+</script>
+
+
+<!-- <template>
+  <div class="product">
+    <div class="container">
+      <h2 class="product-h2">Подробное описание услуги</h2>
+      <div class="row product-row">
+        <div class="col-9">
           <h3 class="product-h-name">
             «Галактика AMM»
           </h3>
@@ -26,9 +126,8 @@
             <p>Система «Галактика AMM» (Advanced Manufacturing Management) – инструмент развития организационного
               управления современным производственным предприятием в рамках цифровой трансформации промышленности. В
               «Галактика АММ» используется современный подход к управлению и организации производства на предприятии.
-            </p>
-
-            <p>«Галактика AMM» повышает эффективность планирования и управления производством, обеспечивает оперативный
+              
+              «Галактика AMM» повышает эффективность планирования и управления производством, обеспечивает оперативный
               мониторинг производственных подразделений, кооперационных поставок и материально-технического обеспечения.
             </p>
           </div>
@@ -57,4 +156,4 @@ export default {
     title: 'Услуга «Галактика AMM» — Корпорация «Галактика'
   },
 };
-</script>
+</script> -->

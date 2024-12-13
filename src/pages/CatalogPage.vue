@@ -10,12 +10,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-amm">«Галактика AMM»</router-link>
+                <router-link to="/product/1">«Галактика AMM»</router-link>
               </h3>
               <p>Постройте прибыльный и эффективный производственный процесс на любом предприятии</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-amm">
+              <router-link to="/product/1">
                 <img class="catalog-img " src="@/assets/img/catalog/amm.png" alt="«Галактика AMM»">
               </router-link>
             </div>
@@ -175,10 +175,34 @@
 </template>
 
 <script>
+// export default {
+//   name: 'CatalogPage',
+//   meta: {
+//     title: 'Каталог — Корпорация «Галактика»'
+//   },
+// };
+
+import { ref } from 'vue';
+import axios from 'axios';
+
 export default {
-  name: 'CatalogPage',
-  meta: {
-    title: 'Каталог — Корпорация «Галактика»'
+  setup() {
+    const products = ref([]);
+
+    const loadProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/products'); // Эндпоинт для получения всех продуктов
+        products.value = response.data; // Загружаем данные о продуктах
+      } catch (error) {
+        console.error('Ошибка загрузки продуктов:', error);
+      }
+    };
+
+    loadProducts(); // Вызываем функцию загрузки продуктов при монтировании компонента
+
+    return {
+      products,
+    };
   },
 };
 </script>
