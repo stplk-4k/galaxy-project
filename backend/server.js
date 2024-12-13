@@ -67,7 +67,12 @@ app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
 
   db.get(`SELECT * FROM users WHERE username = ?`, [username], async (err, user) => {
-      if (!user || !(await bcrypt.compare(password, user.password))) {
+      if (!user) {
+          return res.status(401).json({ message: 'Неверный логин или пароль' });
+      }
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) {
           return res.status(401).json({ message: 'Неверный логин или пароль' });
       }
 
