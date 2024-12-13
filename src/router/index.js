@@ -20,7 +20,6 @@ import FeedbackPage from '@/pages/FeedbackPage.vue';
 import RegistrationPage from '@/pages/RegistrationPage.vue';
 import EnterPage from '@/pages/EnterPage.vue';
 import AccountPage from '@/pages/AccountPage.vue';
-import ProductsDetailPage from '@/pages/products/ProductsDetailPage.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -31,21 +30,25 @@ const routes = [
     { path: '/history', name: 'History', component: History },
     { path: '/team', name: 'Team', component: Team },
     { path: '/product/:id', name: 'ProductAmm', component: ProductAmm },
+    { path: '/product/:id', name: 'ProductCpm', component: ProductCpm },
+    { path: '/product/:id', name: 'ProductEam', component: ProductEam },
+    { path: '/product/:id', name: 'ProductElms', component: ProductElms },
     // { path: '/product-amm', name: 'ProductAmm', component: ProductAmm },
-    { path: '/product-cpm', name: 'ProductCpm', component: ProductCpm },
-    { path: '/product-eam', name: 'ProductEam', component: ProductEam },
-    { path: '/product-erp', name: 'ProductErp', component: ProductErp },
+    // { path: '/product-cpm', name: 'ProductCpm', component: ProductCpm },
+    // { path: '/product-eam', name: 'ProductEam', component: ProductEam },
+    // { path: '/product-eam', name: 'ProductEam', component: ProductEam },
+    { path: '/product/:id', name: 'ProductErp', component: ProductErp },
+    // { path: '/product-erp', name: 'ProductErp', component: ProductErp },
     { path: '/product-ecm', name: 'ProductEcm', component: ProductEcm },
     { path: '/product-esb', name: 'ProductEsb', component: ProductEsb },
     { path: '/product-mes', name: 'ProductMes', component: ProductMes },
     { path: '/product-vuz', name: 'ProductVuz', component: ProductVuz },
-    { path: '/product-elms', name: 'ProductElms', component: ProductElms },
+    // { path: '/product-elms', name: 'ProductElms', component: ProductElms },
     { path: '/product-ruz', name: 'ProductRuz', component: ProductRuz },
     { path: '/feedback', name: 'FeedbackPage', component: FeedbackPage },
     { path: '/registration', name: 'RegistrationPage', component: RegistrationPage },
     { path: '/enter', name: 'EnterPage', component: EnterPage },
     { path: '/account', name: 'AccountPage', component: AccountPage },
-    { path: '/proddet', name: 'ProductsDetailPage', component: ProductsDetailPage },
 
   ];
   

@@ -8,17 +8,6 @@
           <h3 class="product-h">Краткое описание</h3>
           <p class="product-short">{{ product.short_description }}</p>
 
-          <h3 class="product-h">Характеристики</h3>
-          <ul class="product-speial">
-            <li>Синхронное планирование и контроль работ по всему жизненному циклу изделия</li>
-            <li>Встроенные механизмы, поддерживающие современные методы управления проектами</li>
-            <li>Реализация управления производством как внутренними цепями производственных и поставочных работ (SCM)
-            </li>
-            <li>Реализация процессного подхода к управлению основным и обеспечивающим производством</li>
-            <li>Обеспечение анализа эффективности бизнес-процессов</li>
-            <li>Встроенные механизмы многомерного анализа данных</li>
-          </ul>
-
           <h3 class="product-h">Подробное описание</h3>
           <div class="product-detailed">
             <p>{{ product.full_description }}</p>
@@ -29,9 +18,7 @@
             <p>{{ product.price }} руб.</p>
           </div>
 
-          <a :href="product.link">
-            <button type="button" class="btn btn-primary">Узнать еще подробнее</button>
-          </a>
+          <button type="button" class="btn btn-primary">Купить</button>
           <router-link to="/catalog">
             <button type="button" class="btn btn-secondary">Обратно в каталог</button>
           </router-link>
@@ -59,40 +46,19 @@ export default {
   },
   methods: {
     fetchProduct() {
-      const productId = this.$route.params.id; // Получаем ID продукта из маршрута
+      const productId = this.$route.params.id; 
       axios.get(`http://localhost:3000/api/product/${productId}`)
         .then(response => {
           this.product = response.data;
-          console.log(this.product); // Логируем полученные данные
+          console.log(this.product); 
         })
         .catch(error => {
           console.error("Ошибка при получении продукта:", error);
         });
     },
     getImagePath(image) {
-      return image ? require(`@/assets/img/catalog/${image}`) : ''; // Возвращаем пустую строку, если image не задан
+      return image ? require(`@/assets/img/catalog/${image}`) : ''; 
     }
-    // fetchProduct() {
-    //   const productId = 1;
-    //   axios.get(`http://localhost:3000/api/product/${productId}`)
-    //     .then(response => {
-    //       this.product = response.data;
-    //       this.product.features = [
-    //         "Синхронное планирование и контроль работ по всему жизненному циклу изделия",
-    //         "Встроенные механизмы, поддерживающие современные методы управления проектами",
-    //         "Реализация управления производством как внутренними цепями производственных и поставочных работ (SCM)",
-    //         "Реализация процессного подхода к управлению основным и обеспечивающим производством",
-    //         "Обеспечение анализа эффективности бизнес-процессов",
-    //         "Встроенные механизмы многомерного анализа данных"
-    //       ];
-    //     })
-    //     .catch(error => {
-    //       console.error("There was an error fetching the product:", error);
-    //     });
-    // },
-    // getImagePath(image) {
-    //   return require(`@/assets/img/catalog/${image}`);
-    // }
   },
 };
 </script>

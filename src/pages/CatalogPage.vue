@@ -26,12 +26,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-cpm">«Галактика CPM»</router-link>
+                <router-link to="/product/2">«Галактика CPM»</router-link>
               </h3>
               <p>Достигайте совершенства в управлении финансами и принимайте решения в режиме реального времени</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-cpm">
+              <router-link to="/product/2">
                 <img class="catalog-img " src="@/assets/img/catalog/cpm.png" alt="«Галактика CPM»">
               </router-link>
             </div>
@@ -42,12 +42,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-eam">«Галактика EAM»</router-link>
+                <router-link to="/product/3">«Галактика EAM»</router-link>
               </h3>
               <p>Снижайте стоимость владения активами и сокращайте затраты на их восстановление</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-eam">
+              <router-link to="/product/3">
                 <img class="catalog-img " src="@/assets/img/catalog/eam.png" alt="«Галактика EAM»">
               </router-link>
             </div>
@@ -58,12 +58,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-erp">«Галактика ERP»</router-link>
+                <router-link to="/product/6">«Галактика ERP»</router-link>
               </h3>
               <p>Эффективно решайте текущие и стратегические управленческие задачи современного предприятия</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-erp">
+              <router-link to="/product/6">
                 <img class="catalog-img " src="@/assets/img/catalog/erp.png" alt="«Галактика ERP»">
               </router-link>
             </div>
@@ -76,12 +76,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-ecm">«Галактика ECM»</router-link>
+                <router-link to="/product/4">«Галактика ECM»</router-link>
               </h3>
               <p>Управляйте документами и корпоративной информацией</p>
             </div>
             <div class="col-3 catalog-img-block">
-              <router-link to="/product-ecm">
+              <router-link to="/product/4">
                 <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/ecm.png" alt="«Галактика ECM»">
               </router-link>
             </div>
@@ -109,12 +109,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-mes">«Галактика MES»</router-link>
+                <router-link to="/product/8">«Галактика MES»</router-link>
               </h3>
               <p>Реализуйте планирование по операциям и диспетчеризацию внутри производственных подразделений</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-mes">
+              <router-link to="/product/8">
                 <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/mes.png" alt="«Галактика MES»">
               </router-link>
             </div>
@@ -125,12 +125,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-vuz">«Галактика ВУЗ»</router-link>
+                <router-link to="/product/10">«Галактика ВУЗ»</router-link>
               </h3>
               <p>Управляйте учебным процессом и научной деятельностью университета</p>
             </div>
             <div class="col-3 catalog-img-block">
-              <router-link to="/product-vuz">
+              <router-link to="/product/10">
                 <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/vuz.png" alt="«Галактика ВУЗ»">
               </router-link>
             </div>
@@ -141,12 +141,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-elms">«Галактика eLMS»</router-link>
+                <router-link to="/product/5">«Галактика eLMS»</router-link>
               </h3>
               <p>Организуйте сквозной процесс обучения с возможностью интеграции с уже существующими системами</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-elms">
+              <router-link to="/product/5">
                 <img class="catalog-img catalog-img-size" src="@/assets/img/catalog/elms.png" alt="«Галактика eLMS»">
               </router-link>
               
@@ -158,12 +158,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-ruz">«Галактика РУЗ»</router-link>
+                <router-link to="/product/9">«Галактика РУЗ»</router-link>
               </h3>
               <p>Эффективно управляйте ресурсами вуза. Экономьте время при подготовке расписания учебных занятий</p>
             </div>
             <div class="col-3">
-              <router-link to="/product-ruz">
+              <router-link to="/product/9">
                 <img class="catalog-img " src="@/assets/img/catalog/ruz.png" alt="«Галактика РУЗ»">
               </router-link>
             </div>
