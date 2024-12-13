@@ -90,9 +90,6 @@
           <button type="submit" class="btn btn-primary">Оставить отзыв</button>
         </form>
 
-        <!-- <h2>Введенные данные:</h2>
-        <pre>{{ formData }}</pre> -->
-
       </div>
     </div>
   </div>

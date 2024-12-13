@@ -14,7 +14,7 @@
             <router-view></router-view>
           </div>
         </div>
-        
+
 
         <FooterComponent />
       </div>
@@ -31,4 +31,3 @@ import SidebarComponent from './components/SidebarComponent.vue';
 </script>
 
 
-<style></style>

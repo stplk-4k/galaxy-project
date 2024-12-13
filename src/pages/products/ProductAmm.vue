@@ -4,46 +4,27 @@
       <h2 class="product-h2">Подробное описание услуги</h2>
       <div class="row product-row">
         <div class="col-9">
-          <h3 class="product-h-name">
-            «Галактика AMM»
-          </h3>
+          <h3 class="product-h-name">{{ product.name }}</h3>
           <h3 class="product-h">Краткое описание</h3>
-          <p class="product-short">Постройте прибыльный и эффективный производственный процесс на любом предприятии</p>
-
-          <h3 class="product-h">Характеристики</h3>
-          <ul class="product-speial">
-            <li>Синхронное планирование и контроль работ по всему жизненному циклу изделия</li>
-            <li>Встроенные механизмы, поддерживающие современные методы управления проектами</li>
-            <li>Реализация управления производством как внутренними цепями производственных и поставочных работ (SCM)
-            </li>
-            <li>Реализация процессного подхода к управлению основным и обеспечивающим производством</li>
-            <li>Обеспечение анализа эффективности бизнес-процессов</li>
-            <li>Встроенные механизмы многомерного анализа данных</li>
-          </ul>
+          <p class="product-short">{{ product.short_description }}</p>
 
           <h3 class="product-h">Подробное описание</h3>
           <div class="product-detailed">
-            <p>Система «Галактика AMM» (Advanced Manufacturing Management) – инструмент развития организационного
-              управления современным производственным предприятием в рамках цифровой трансформации промышленности. В
-              «Галактика АММ» используется современный подход к управлению и организации производства на предприятии.
-            </p>
-
-            <p>«Галактика AMM» повышает эффективность планирования и управления производством, обеспечивает оперативный
-              мониторинг производственных подразделений, кооперационных поставок и материально-технического обеспечения.
-            </p>
+            <p>{{ product.full_description }}</p>
           </div>
 
-          <a href="https://galaktika.ru/amm">
-            <button type="button" class="btn btn-primary">Узнать еще подробнее</button>
-          </a>
+          <h3 class="product-h">Цена</h3>
+          <div class="product-detailed">
+            <p>{{ product.price }} руб.</p>
+          </div>
+
+          <button type="button" class="btn btn-primary">Купить</button>
           <router-link to="/catalog">
             <button type="button" class="btn btn-secondary">Обратно в каталог</button>
           </router-link>
-
-
         </div>
         <div class="col-3">
-          <img class="catalog-img product-img" src="@/assets/img/catalog/amm.png" alt="«Галактика AMM»">
+          <img :src="getImagePath(product.image)" alt="{{ product.name }}" class="catalog-img product-img">
         </div>
       </div>
     </div>
@@ -51,10 +32,33 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ProductAmm',
-  meta: {
-    title: 'Услуга «Галактика AMM» — Корпорация «Галактика'
+  data() {
+    return {
+      product: {}
+    };
+  },
+  created() {
+    this.fetchProduct();
+  },
+  methods: {
+    fetchProduct() {
+      const productId = this.$route.params.id; 
+      axios.get(`http://localhost:3000/api/product/${productId}`)
+        .then(response => {
+          this.product = response.data;
+          console.log(this.product); 
+        })
+        .catch(error => {
+          console.error("Ошибка при получении продукта:", error);
+        });
+    },
+    getImagePath(image) {
+      return image ? require(`@/assets/img/catalog/${image}`) : ''; 
+    }
   },
 };
 </script>
