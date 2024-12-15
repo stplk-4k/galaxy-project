@@ -15,20 +15,21 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {
+    const router = useRouter();
     const username = ref(localStorage.getItem('username') || 'Гость');
 
     const writeReview = () => {
-      // Логика для перехода на страницу написания отзыва
-      window.location.href = '/write-review'; // Замените на нужный маршрут
+      router.push('/write-review'); 
     };
 
     const logout = () => {
       localStorage.removeItem('username');
       localStorage.removeItem('token');
-      window.location.href = '/'; // Перенаправление на главную страницу после выхода
+      router.push('/'); 
     };
 
     return {

@@ -47,10 +47,12 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 export default {
   setup() {
+    const router = useRouter();
     const name = ref('');
     const username = ref('');
     const email = ref('');
@@ -79,11 +81,9 @@ export default {
 
           alert('Регистрация успешна!');
 
-          // Сохранение логина в localStorage
           localStorage.setItem('username', username.value);
 
-          // Перенаправление на страницу личного кабинета
-          window.location.href = '/account'; // Используем window.location.href
+          router.push('/account'); 
         } catch (error) {
           alert(error.response.data.message);
         }

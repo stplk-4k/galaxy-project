@@ -37,10 +37,12 @@
 
 <script>
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
 export default {
   setup() {
+    const router = useRouter();
     const username = ref('');
     const password = ref('');
     const errors = ref({});
@@ -65,9 +67,7 @@ export default {
           alert('Вход успешен!');
           localStorage.setItem('username', username.value);
           localStorage.setItem('token', response.data.token);
-          // console.log(response.data.token); 
-          // window.location.reload();
-          window.location.href = '/account';
+          router.push('/account'); 
         } catch (error) {
           alert(error.response.data.message);
         }
@@ -77,12 +77,11 @@ export default {
     const logout = () => {
       localStorage.removeItem('username');
       localStorage.removeItem('token');
-      window.location.href = '/';
-      // window.location.reload(); // Перезагрузка страницы после выхода
+      router.push('/'); 
     };
 
     const writeReview = () => {
-      window.location.href = '/write-review'; // Замените на нужный маршрут
+      router.push('/write-review'); 
     };
 
     return {
