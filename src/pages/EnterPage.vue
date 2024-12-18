@@ -24,9 +24,9 @@
 
         <div v-else>
           <h2>Здравствуйте, {{ username }}!</h2>
-          <button @click="writeReview" class="btn btn-link btn-enter-true" >Написать отзыв</button>
+          <button @click="writeReview" class="btn btn-link btn-enter-true">Написать отзыв</button>
           <button @click="logout" class="btn btn-primary">Выйти из аккаунта</button>
-          
+
         </div>
 
       </div>
@@ -37,19 +37,18 @@
 
 <script>
 import axios from 'axios';
-import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { login as saveLogin, logout as clearLogin, isLoggedIn } from '@/store/auth';
 
 export default {
   setup() {
-    const router = useRouter();
     const username = ref('');
     const password = ref('');
     const errors = ref({});
 
-    const isLoggedIn = !!localStorage.getItem('username');
+    const isUserLoggedIn = isLoggedIn();
 
-    if (isLoggedIn) {
+    if (isUserLoggedIn) {
       username.value = localStorage.getItem('username');
     }
 
@@ -65,9 +64,9 @@ export default {
             password: password.value,
           });
           alert('Вход успешен!');
-          localStorage.setItem('username', username.value);
-          localStorage.setItem('token', response.data.token);
-          router.push('/account'); 
+          saveLogin(username.value, response.data.token);
+
+          window.location.href = '/account';
         } catch (error) {
           alert(error.response.data.message);
         }
@@ -75,13 +74,12 @@ export default {
     };
 
     const logout = () => {
-      localStorage.removeItem('username');
-      localStorage.removeItem('token');
-      router.push('/'); 
+      clearLogin();
+      window.location.href = '/';
     };
 
     const writeReview = () => {
-      router.push('/write-review'); 
+      window.location.href = '/write-review';
     };
 
     return {
@@ -91,7 +89,7 @@ export default {
       login,
       logout,
       writeReview,
-      isLoggedIn,
+      isUserLoggedIn,
     };
   },
 };

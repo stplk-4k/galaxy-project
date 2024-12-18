@@ -49,27 +49,7 @@ app.get('/api/product/:id', (req, res) => {
 });
 
 
-// app.get('/api/products/:id', (req, res) => {
-//   const id = req.params.id;
-//   prod_db.get('SELECT * FROM products WHERE id = ?', [id], (err, row) => {
-//     if (err) {
-//       res.status(500).send(err.message);
-//       return;
-//     }
-//     if (!row) {
-//       res.status(404).send('Продукт не найден');
-//       return;
-//     }
-//     res.json(row);
-//   });
-// });
 
-// const feedback_db = new sqlite3.Database('./feedback.db', (err) => {
-//   if (err) {
-//       console.error(err.message);
-//   }
-//   console.log('Подключено к базе данных SQLite - отзывы');
-// });
 
 app.post('/api/register', async (req, res) => {
   const { name, username, email, password } = req.body;
@@ -87,7 +67,9 @@ app.post('/api/register', async (req, res) => {
                       console.error(err.message); 
                       return res.status(500).json({ message: 'Ошибка сервера' });
                   }
-                  res.status(201).json({ message: 'Регистрация успешна', userId: this.lastID });
+                  const token = jwt.sign({ id: this.lastID }, 'secret_key', { expiresIn: '1h' });
+                  res.status(201).json({ message: 'Регистрация успешна', token });
+                //   res.status(201).json({ message: 'Регистрация успешна', userId: this.lastID });
               });
       });
   } catch (error) {
@@ -114,6 +96,34 @@ app.post('/api/login', async (req, res) => {
       res.json({ token });
   });
 });
+
+
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
+
+// app.get('/api/products/:id', (req, res) => {
+//   const id = req.params.id;
+//   prod_db.get('SELECT * FROM products WHERE id = ?', [id], (err, row) => {
+//     if (err) {
+//       res.status(500).send(err.message);
+//       return;
+//     }
+//     if (!row) {
+//       res.status(404).send('Продукт не найден');
+//       return;
+//     }
+//     res.json(row);
+//   });
+// });
+
+// const feedback_db = new sqlite3.Database('./feedback.db', (err) => {
+//   if (err) {
+//       console.error(err.message);
+//   }
+//   console.log('Подключено к базе данных SQLite - отзывы');
+// });
 
 // app.get('/api/reviews', (req, res) => {
 //   feedback_db.all('SELECT * FROM reviews', [], (err, rows) => {
@@ -151,7 +161,3 @@ app.post('/api/login', async (req, res) => {
 // app.get('/api/reviews', (req, res) => {
 //   res.json(reviews);
 // });
-
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});

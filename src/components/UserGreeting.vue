@@ -7,26 +7,26 @@
 </template>
 
 <script>
+import { getUsername, logout as clearLogin } from '@/store/auth';
+
 export default {
   data() {
     return {
-      username: localStorage.getItem('username') || '',
+      username: getUsername() || '',
     };
   },
   computed: {
     isLoggedIn() {
-      return !!this.username; // Проверка, вошел ли пользователь
+      return !!this.username;
     },
   },
   methods: {
     logout() {
-      localStorage.removeItem('username');
-      localStorage.removeItem('token');
-      window.location.href = '/'; // Перенаправление на главную страницу или страницу входа
+      clearLogin();
+      window.location.href = '/'; 
     },
     writeReview() {
-      // Логика для написания отзыва (например, перенаправление на страницу отзыва)
-      window.location.href = '/write-review'; // Замените на нужный маршрут
+      window.location.href = '/write-review'; 
     },
   },
 };

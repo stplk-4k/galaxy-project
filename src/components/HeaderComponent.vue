@@ -70,20 +70,20 @@
 <script>
 import axios from 'axios';
 import { ref } from 'vue';
+import { login as saveLogin, logout as clearLogin, isLoggedIn as checkIsLoggedIn } from '@/store/auth';
 
 export default {
     setup() {
         const login = ref('');
         const password = ref('');
 
-        const isLoggedIn = !!localStorage.getItem('username');
+        const isLoggedIn = checkIsLoggedIn();
 
         if (isLoggedIn) {
             login.value = localStorage.getItem('username');
         }
 
         const loginUser = async () => {
-            // Проверка на пустые поля
             if (!login.value || !password.value) {
                 alert('Пожалуйста, введите логин и пароль.');
                 return;
@@ -97,18 +97,12 @@ export default {
 
                 alert('Вход успешен!');
 
-                // Сохранение логина и токена
-                localStorage.setItem('username', login.value);
-                localStorage.setItem('token', response.data.token);
+                saveLogin(login.value, response.data.token);
 
-
-                // Обновление состояния
                 window.location.href = '/account';
-                // window.location.reload(); // Перезагрузка страницы для обновления состояния
             } catch (error) {
-                // Обработка ошибки
                 if (error.response && error.response.data) {
-                    alert(error.response.data.message); // Показываем сообщение об ошибке
+                    alert(error.response.data.message); 
                 } else {
                     alert('Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.');
                 }
@@ -116,10 +110,8 @@ export default {
         };
 
         const logout = () => {
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
+            clearLogin();
             window.location.href = '/';
-            // window.location.reload(); // Перезагрузка страницы после выхода
         };
 
         return {

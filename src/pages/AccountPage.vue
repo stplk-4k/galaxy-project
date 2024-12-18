@@ -15,21 +15,19 @@
 
 <script>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { getUsername, logout as clearLogin } from '@/store/auth';
 
 export default {
   setup() {
-    const router = useRouter();
-    const username = ref(localStorage.getItem('username') || 'Гость');
+    const username = ref(getUsername() || 'Гость');
 
     const writeReview = () => {
-      router.push('/write-review'); 
+      window.location.href = '/writeReview'; 
     };
 
     const logout = () => {
-      localStorage.removeItem('username');
-      localStorage.removeItem('token');
-      router.push('/'); 
+      clearLogin();
+      window.location.href = '/'; 
     };
 
     return {

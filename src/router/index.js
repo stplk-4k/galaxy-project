@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+// import auth from '../store/auth.js';
 import Home from '../pages/HomePage.vue';
 import Catalog from '../pages/CatalogPage.vue';
 import Service from '../pages/ServicePage.vue';
@@ -56,5 +57,21 @@ const routes = [
     history: createWebHistory(process.env.BASE_URL),
     routes,
   });
+
+  // const store = createStore({
+  //   modules: {
+  //     auth,
+  //   }
+  // });
+
+export default router;
+
+  // export default {
+  //   router, 
+  //   // store,
+  // };
   
-  export default router;
+  // export default {
+  //   router, 
+  //   store,
+  // };
