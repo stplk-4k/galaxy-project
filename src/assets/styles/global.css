@@ -29,6 +29,11 @@ body {
     font-family: mr;
 }
 
+strong {
+    font-weight: 800;
+    font-size: 20px;
+}
+
 /* HEADER */
 
 #header {
@@ -840,4 +845,19 @@ h4 {
     font-size: 18px;
     font-style: italic;
     margin: 40px 0 40px 35px;
+}
+
+/* PRIVACY */
+
+.privacy-content {
+    margin-right: 80px;
+}
+
+.btn-privacy {
+    margin-left: 0;
+    margin-bottom: 40px;
+}
+
+.btn-privacy a {
+    text-decoration: none;
 }

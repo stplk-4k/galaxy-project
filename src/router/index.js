@@ -21,6 +21,7 @@ import RegistrationPage from '@/pages/RegistrationPage.vue';
 import EnterPage from '@/pages/EnterPage.vue';
 import AccountPage from '@/pages/AccountPage.vue';
 import CartPage from '@/pages/CartPage.vue';
+import PrivacyPage from '@/pages/PrivacyPage.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -45,6 +46,8 @@ const routes = [
     { path: '/enter', name: 'EnterPage', component: EnterPage },
     { path: '/account', name: 'AccountPage', component: AccountPage },
     { path: '/cart', name: 'CartPage', component: CartPage },
+    { path: '/privacy', name: 'PrivacyPage', component: PrivacyPage },
+
 
 
   ];

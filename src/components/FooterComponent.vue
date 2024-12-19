@@ -22,7 +22,9 @@
                     </div>
                     <div class="col-sm-4 ">
                         <ul class="sidebar-ul footer-ul">
-                            <li><a href="https://galaktika.ru/uslugi#sop">Техническое сопровождение</a></li>
+                            <li>
+                                <router-link to="/privacy">Политика конфиденциальности</router-link>
+                            </li>
                             <li><a href="mailto:support@galaktika.ru">support@galaktika.ru</a></li>
                             <li><a href="tel:+7 495 252-02-48">+7 495 252-02-48</a></li>
                         </ul>

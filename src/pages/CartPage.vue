@@ -143,6 +143,16 @@ export default {
       }, 0);
     };
 
+    const checkout = async () => {
+      Swal.fire({
+          title: 'Заглушка!',
+          text: 'Отправка',
+          icon: 'info',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
+    };
+
     onMounted(fetchCartItems);
 
     return {
@@ -150,6 +160,7 @@ export default {
       removeFromCart,
       clearCart,
       calculateTotal,
+      checkout,
     };
   },
 };
