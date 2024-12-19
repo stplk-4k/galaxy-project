@@ -19,7 +19,6 @@
           </div>
 
           <button type="button" class="btn btn-primary" @click="addToCart">Купить</button>
-          <!-- <button class="btn btn-primary" @click="addToCart">Купить</button> -->
           <router-link to="/catalog">
             <button type="button" class="btn btn-secondary">Обратно в каталог</button>
           </router-link>

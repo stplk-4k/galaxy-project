@@ -43,7 +43,6 @@
                                         </div>
                                         <div class="col-auto">
                                             <button  type="submit" class="btn btn-primary btn-header">Войти</button>
-                                            <!-- Кнопка для отправки формы -->
                                         </div>
                                     </div>
                                 </form>
@@ -52,8 +51,11 @@
                             <div v-else>
                                 <h3 class="header-form-true">Вы вошли под логином: {{ login }}</h3>
                                 <div class="header-form-btn">
-                                    <router-link to="/account" class="btn btn-link btn-enter-true">Личный
-                                        кабинет</router-link>
+                                    <router-link to="/cart" class="btn btn-link btn-cart">
+                                        <img src="@/assets/img/icons/cart.png" alt="Корзина">
+                                    </router-link>
+                                    <router-link to="/account" class="btn btn-link btn-enter-true">Личный кабинет</router-link>
+                                    
                                     <button @click="logout" class="btn btn-primary btn-header-exit">Выйти</button>
                                 </div>
                             </div>

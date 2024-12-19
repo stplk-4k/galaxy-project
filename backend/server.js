@@ -11,7 +11,7 @@ const users = [];
 
 app.use(cors({
   origin: 'http://localhost:8081',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
@@ -21,10 +21,10 @@ app.use(express.json());
 let cart = [];
 
 app.post('/api/cart/add', (req, res) => {
-  console.log('Request body:', req.body); // Логируем тело запроса
+  console.log('Request body:', req.body);
   const { productId, username } = req.body;
 
-  console.log('Received:', { productId, username }); // Логируем полученные данные
+  console.log('Received:', { productId, username }); 
 
   if (!username) {
       return res.status(401).json({ message: 'Пользователь не авторизован' });
@@ -35,22 +35,19 @@ app.post('/api/cart/add', (req, res) => {
       return res.status(400).json({ message: 'Товар уже добавлен в корзину' });
   }
 
-  cart.push({ productId, username }); // Добавляем товар в корзину
-  console.log('Cart after addition:', cart); // Логируем текущее состояние корзины
+  cart.push({ productId, username }); 
+  console.log('Cart after addition:', cart); 
   res.status(200).json({ message: 'Товар добавлен в корзину' });
 });
 
-
-
-// Получение товаров из корзины для конкретного пользователя
 app.get('/api/cart/:username', (req, res) => {
-  console.log('Received GET request for cart'); // Логируем получение запроса
+  console.log('Received GET request for cart');
   const { username } = req.params;
-  console.log('Fetching cart for user:', username); // Логируем имя пользователя
+  console.log('Fetching cart for user:', username); 
 
   const userCart = cart.filter(item => item.username === username);
   
-  console.log('User cart:', userCart); // Логируем содержимое корзины для пользователя
+  console.log('User cart:', userCart); 
   
   if (userCart.length === 0) {
       return res.status(404).json({ message: 'Корзина пуста' });
@@ -58,6 +55,42 @@ app.get('/api/cart/:username', (req, res) => {
   
   res.json(userCart);
 });
+
+app.delete('/api/cart/remove', (req, res) => {
+  const { productId, username } = req.body;
+
+  console.log('Request body for removal:', req.body); 
+
+  if (!username) {
+      return res.status(401).json({ message: 'Пользователь не авторизован' });
+  }
+
+  const itemIndex = cart.findIndex(item => item.productId === productId && item.username === username);
+  
+  if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Товар не найден в корзине' });
+  }
+
+  cart.splice(itemIndex, 1);
+  console.log('Cart after removal:', cart); 
+  res.status(200).json({ message: 'Товар удален из корзины' });
+});
+
+
+app.delete('/api/cart/clear', (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+      return res.status(401).json({ message: 'Пользователь не авторизован' });
+  }
+
+  // cart = [];
+  cart = cart.filter(item => item.username !== username); 
+  console.log('Cart cleared for user:', username);
+  
+  res.status(200).json({ message: 'Корзина очищена' });
+});
+
 
 app.use(bodyParser.json());
 
@@ -143,17 +176,6 @@ app.post('/api/login', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
-
-// app.post('/api/cart/add', (req, res) => {
-//   const { productId, username } = req.body;
-
-//   if (!username) {
-//       return res.status(401).json({ message: 'Пользователь не авторизован' });
-//   }
-
-//   cart.push({ productId, username }); // Добавляем товар в корзину
-//   res.status(200).json({ message: 'Товар добавлен в корзину' });
-// });
 
 
 // const services = [

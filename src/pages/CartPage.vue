@@ -4,14 +4,30 @@
     <div v-if="cartItems.length > 0">
       <ul>
         <li v-for="item in cartItems" :key="item.productId">
-          <p>Товар ID: {{ item.productId }}</p>
-          
+          <div class="row cart-row">
+            <div class="col-9">
+              <p>Товар ID: {{ item.productId }}</p>
+              <p>Название: {{ item.name }}</p>
+              <p>Описание: {{ item.description }}</p>
+              <p>Цена: {{ item.price }} руб.</p>
+            </div>
+            <div class="col-3">
+              <button @click="removeFromCart(item.productId)" class="btn btn-cart-remove">
+                <img src="@/assets/img/icons/close.png" alt="Удалить">
+              </button>
+            </div>
+          </div>
         </li>
       </ul>
-      <button @click="checkout">Оформить заказ</button>
+      <button class="btn btn-link btn-cart-clear" @click="clearCart">Очистить корзину</button>
+      <button class="btn btn-primary" @click="checkout">Оформить заказ</button>
+
     </div>
     <div v-else>
-      <p>Ваша корзина пуста.</p>
+      <p>Ваша корзина пуста</p>
+      <router-link to="/catalog">
+        <button type="button" class="btn btn-secondary btn-cart-zero">Посмотреть услуги</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -19,7 +35,7 @@
 <script>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
-import { getUsername } from '@/store/auth'; 
+import { getUsername } from '@/store/auth';
 
 export default {
   setup() {
@@ -27,28 +43,82 @@ export default {
 
     const fetchCartItems = async () => {
       const username = getUsername();
-      // console.log('Fetching cart items for user:', username); 
-      if (!username) {
-        return; 
-      }
+      // const username = localStorage.getItem('username');
+      if (!username) return;
 
       try {
         const response = await axios.get(`http://localhost:3000/api/cart/${username}`);
-        cartItems.value = response.data; 
-        // console.log('Fetched cart items:', response.data); 
+        cartItems.value = response.data;
+        console.log('Fetched cart items:', response.data);
       } catch (error) {
         console.error("Ошибка при получении товаров из корзины:", error);
       }
     };
 
-    onMounted(fetchCartItems); 
+    const removeFromCart = async (productId) => {
+      const username = localStorage.getItem('username');
+
+      if (!username) {
+        alert('Пожалуйста, войдите в систему, чтобы удалить товары из корзины.');
+        return;
+      }
+
+      try {
+        const response = await axios.delete('http://localhost:3000/api/cart/remove', {
+          data: { productId, username }
+        });
+
+        console.log('Response from server:', response.data);
+        alert(response.data.message);
+
+        await fetchCartItems();
+        window.location.reload();
+        if (cartItems.value.length === 0) {
+          alert('Корзина пуста.');
+        }
+      } catch (error) {
+        console.error("Ошибка при удалении товара из корзины:", error);
+
+        if (error.response && error.response.status === 404) {
+          alert('Товар не найден в корзине.');
+        } else {
+          alert('Не удалось удалить товар из корзины.');
+        }
+      }
+    };
+
+    const clearCart = async () => {
+      const username = getUsername();
+
+      if (!username) {
+        alert('Пожалуйста, войдите в систему, чтобы очистить корзину.');
+        return;
+      }
+
+      try {
+        // Отправляем запрос на сервер для очистки корзины
+        const response = await axios.delete('http://localhost:3000/api/cart/clear', {
+          data: { username }
+        });
+
+        // Обновляем состояние корзины
+        cartItems.value = []; // Очищаем массив товаров в корзине
+        alert(response.data.message);
+      } catch (error) {
+        console.error("Ошибка при очистке корзины:", error);
+        alert('Не удалось очистить корзину.');
+      }
+    };
+
+    onMounted(fetchCartItems);
 
     return {
       cartItems,
+      removeFromCart,
+      clearCart,
     };
   },
 };
 
 
 </script>
-

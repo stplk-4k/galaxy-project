@@ -35,7 +35,6 @@
 
 <script>
 import axios from 'axios';
-import { isLoggedIn } from '@/store/auth.js';
 
 export default {
   name: 'ProductCpm',
@@ -60,32 +59,7 @@ export default {
         });
     },
     getImagePath(image) {
-      return image ? require(`@/assets/img/catalog/${image}`) : ''; // Возвращаем пустую строку, если image не задан
-    },
-    async addToCart() {
-      if (!isLoggedIn()) {
-        alert('Пожалуйста, войдите в систему, чтобы добавить товары в корзину.');
-        return;
-      }
-
-      const username = localStorage.getItem('username');
-      // console.log('Adding to cart:', { productId: this.product.id, username });
-
-      try {
-        
-        const response = await axios.post('http://localhost:3000/api/cart/add', {
-          productId: this.product.id,
-          username: username, 
-        });
-
-        // console.log('Response from server:', response.data);
-
-        alert(response.data.message);
-        this.$router.push('/cart');
-      } catch (error) {
-        console.error("Ошибка при добавлении товара в корзину:", error);
-        alert('Не удалось добавить товар в корзину.');
-      }
+      return image ? require(`@/assets/img/catalog/${image}`) : ''; 
     }
   }
 };

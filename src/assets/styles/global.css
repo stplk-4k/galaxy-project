@@ -127,6 +127,10 @@ body {
     color: var(--g-blue);
 }
 
+.btn-cart {
+    margin-right: 30px;
+}
+
 .header-buttons {
     justify-content: end;
 }
@@ -786,4 +790,22 @@ h4 {
 
 .btn-account {
     margin-right: 30px;
+}
+
+/* CART */
+
+.cart-block {
+    display: flex;
+}
+
+.btn-cart-remove {
+    margin-top: -10px;
+}
+
+.btn-cart-clear {
+    margin-right: 30px;
+}
+
+.btn-cart-zero {
+    margin: 30px 0 0 0;
 }
