@@ -24,9 +24,11 @@
 
         <div v-else>
           <h2>Здравствуйте, {{ username }}!</h2>
-          <button @click="writeReview" class="btn btn-link btn-enter-true" >Написать отзыв</button>
+          <router-link to="/feedback" class="btn btn-link btn-cart">
+            <button class="btn btn-link btn-enter-true">Написать отзыв</button>
+          </router-link>
           <button @click="logout" class="btn btn-primary">Выйти из аккаунта</button>
-          
+
         </div>
 
       </div>
@@ -38,17 +40,22 @@
 <script>
 import axios from 'axios';
 import { ref } from 'vue';
+import { login as saveLogin, logout as clearLogin, isLoggedIn, getUsername } from '@/store/auth';
 
 export default {
+  name: 'EnterPage',
+  meta: {
+    title: 'Вход — Корпорация «Галактика»'
+  },
   setup() {
     const username = ref('');
     const password = ref('');
     const errors = ref({});
 
-    const isLoggedIn = !!localStorage.getItem('username');
+    const isUserLoggedIn = isLoggedIn();
 
-    if (isLoggedIn) {
-      username.value = localStorage.getItem('username');
+    if (isUserLoggedIn) {
+      username.value = getUsername();
     }
 
     const login = async () => {
@@ -63,10 +70,8 @@ export default {
             password: password.value,
           });
           alert('Вход успешен!');
-          localStorage.setItem('username', username.value);
-          localStorage.setItem('token', response.data.token);
-          // console.log(response.data.token); 
-          // window.location.reload();
+          saveLogin(username.value, response.data.token);
+
           window.location.href = '/account';
         } catch (error) {
           alert(error.response.data.message);
@@ -75,14 +80,8 @@ export default {
     };
 
     const logout = () => {
-      localStorage.removeItem('username');
-      localStorage.removeItem('token');
+      clearLogin();
       window.location.href = '/';
-      // window.location.reload(); // Перезагрузка страницы после выхода
-    };
-
-    const writeReview = () => {
-      window.location.href = '/write-review'; // Замените на нужный маршрут
     };
 
     return {
@@ -91,16 +90,8 @@ export default {
       errors,
       login,
       logout,
-      writeReview,
-      isLoggedIn,
+      isUserLoggedIn,
     };
   },
 };
-
-// export default {
-//   name: 'RegistrationPage',
-//   meta: {
-//     title: 'Вход — Корпорация «Галактика»'
-//   },
-// };
 </script>

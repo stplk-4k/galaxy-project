@@ -17,8 +17,8 @@
                         <router-link to="/feedback">Отзывы</router-link>
                     </li>
                 </ul>
-                <div >
-                    <input class="sidebar-search" type="text" v-model="searchString" placeholder="Поиск услуг..." />
+                <div>
+                    <input class="sidebar-search" type="text" v-model="searchString" placeholder="Поиск услуг..." @input="searchServices" />
                     <div v-if="filteredServices.length > 0">
                         <div class="sidebar-search-block" v-for="service in filteredServices" :key="service.id">
                             <router-link :to="`/${service.id}`">

@@ -13,7 +13,6 @@
                         <div class="col-sm-4 header-div-form">
                             <div v-if="!isLoggedIn">
                                 <form class="header-form" @submit.prevent="loginUser">
-                                    <!-- Используем @submit.prevent -->
                                     <div class="row g-3 mb-3 align-items-right ">
                                         <div class="col-auto mr-5 header-form-login">
                                             <label for="inputLogin"
@@ -42,8 +41,7 @@
                                             </router-link>
                                         </div>
                                         <div class="col-auto">
-                                            <button  type="submit" class="btn btn-primary btn-header">Войти</button>
-                                            <!-- Кнопка для отправки формы -->
+                                            <button type="submit" class="btn btn-primary btn-header">Войти</button>
                                         </div>
                                     </div>
                                 </form>
@@ -52,8 +50,12 @@
                             <div v-else>
                                 <h3 class="header-form-true">Вы вошли под логином: {{ login }}</h3>
                                 <div class="header-form-btn">
+                                    <router-link to="/cart" class="btn btn-link btn-cart">
+                                        <img src="@/assets/img/icons/cart.png" alt="Корзина">
+                                    </router-link>
                                     <router-link to="/account" class="btn btn-link btn-enter-true">Личный
                                         кабинет</router-link>
+
                                     <button @click="logout" class="btn btn-primary btn-header-exit">Выйти</button>
                                 </div>
                             </div>
@@ -70,22 +72,29 @@
 <script>
 import axios from 'axios';
 import { ref } from 'vue';
+import { login as saveLogin, logout as clearLogin, isLoggedIn as checkIsLoggedIn } from '@/store/auth';
+import Swal from 'sweetalert2';
 
 export default {
     setup() {
         const login = ref('');
         const password = ref('');
 
-        const isLoggedIn = !!localStorage.getItem('username');
+        const isLoggedIn = checkIsLoggedIn();
 
         if (isLoggedIn) {
             login.value = localStorage.getItem('username');
         }
 
         const loginUser = async () => {
-            // Проверка на пустые поля
             if (!login.value || !password.value) {
-                alert('Пожалуйста, введите логин и пароль.');
+                Swal.fire({
+                    title: 'Ошибка!',
+                    text: "Пожалуйста, введите логин и пароль.",
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#0060cc',
+                });
                 return;
             }
 
@@ -95,31 +104,41 @@ export default {
                     password: password.value,
                 });
 
-                alert('Вход успешен!');
+                saveLogin(login.value, response.data.token);
 
-                // Сохранение логина и токена
-                localStorage.setItem('username', login.value);
-                localStorage.setItem('token', response.data.token);
-
-
-                // Обновление состояния
                 window.location.href = '/account';
-                // window.location.reload(); // Перезагрузка страницы для обновления состояния
+                Swal.fire({
+                    title: 'Успешно!',
+                    text: "Вход успешен!",
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#0060cc',
+                    allowOutsideClick: false,
+                });
             } catch (error) {
-                // Обработка ошибки
                 if (error.response && error.response.data) {
-                    alert(error.response.data.message); // Показываем сообщение об ошибке
+                    Swal.fire({
+                        title: 'Ошибка!',
+                        text: error.response.data.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#0060cc',
+                    });
                 } else {
-                    alert('Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.');
+                    Swal.fire({
+                        title: 'Ошибка!',
+                        text: 'Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#0060cc',
+                    });
                 }
             }
         };
 
         const logout = () => {
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
+            clearLogin();
             window.location.href = '/';
-            // window.location.reload(); // Перезагрузка страницы после выхода
         };
 
         return {

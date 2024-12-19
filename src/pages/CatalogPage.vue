@@ -92,12 +92,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-esb">«Галактика ESB»</router-link>
+                <router-link to="/product/7">«Галактика ESB»</router-link>
               </h3>
               <p>Получайте все бизнес-данные в едином информационном пространстве</p>
             </div>
             <div class="col-3 catalog-img-block">
-              <router-link to="/product-esb">
+              <router-link to="/product/7">
                 <img class="catalog-img " src="@/assets/img/catalog/esb.png" alt="«Галактика ESB»<">
               </router-link>
 
@@ -175,30 +175,28 @@
 </template>
 
 <script>
-// export default {
-//   name: 'CatalogPage',
-//   meta: {
-//     title: 'Каталог — Корпорация «Галактика»'
-//   },
-// };
 
 import { ref } from 'vue';
 import axios from 'axios';
 
 export default {
+  name: 'CatalogPage',
+  meta: {
+    title: 'Каталог — Корпорация «Галактика»'
+  },
   setup() {
     const products = ref([]);
 
     const loadProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/products'); // Эндпоинт для получения всех продуктов
-        products.value = response.data; // Загружаем данные о продуктах
+        const response = await axios.get('http://localhost:3000/api/products'); 
+        products.value = response.data; 
       } catch (error) {
         console.error('Ошибка загрузки продуктов:', error);
       }
     };
 
-    loadProducts(); // Вызываем функцию загрузки продуктов при монтировании компонента
+    loadProducts(); 
 
     return {
       products,

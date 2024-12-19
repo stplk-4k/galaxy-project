@@ -18,7 +18,7 @@
             <p>{{ product.price }} руб.</p>
           </div>
 
-          <button type="button" class="btn btn-primary">Купить</button>
+          <button type="button" class="btn btn-primary" @click="addToCart">Купить</button>
           <router-link to="/catalog">
             <button type="button" class="btn btn-secondary">Обратно в каталог</button>
           </router-link>
@@ -33,6 +33,8 @@
 
 <script>
 import axios from 'axios';
+import { isLoggedIn, getUsername } from '@/store/auth.js';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'ProductAmm',
@@ -58,7 +60,61 @@ export default {
     },
     getImagePath(image) {
       return image ? require(`@/assets/img/catalog/${image}`) : ''; 
+    },
+    async addToCart() {
+      if (!isLoggedIn()) {
+        Swal.fire({
+          title: 'Ошибка!',
+          text: "Пожалуйста, войдите в систему, чтобы добавить товары в корзину.",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
+        return;
+      }
+
+      const username = getUsername(); 
+      console.log('Adding to cart:', { productId: this.product.id, username });
+
+      try {
+        
+        const response = await axios.post('http://localhost:3000/api/cart/add', {
+          productId: this.product.id,
+          username: username, 
+        });
+
+        console.log('Response from server:', response.data);
+
+        Swal.fire({
+          title: 'Успешно!',
+          text: response.data.message,
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
+        this.$router.push('/cart');
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          Swal.fire({
+          title: 'Ошибка!',
+          text: "Товар уже добавлен в корзину.",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
+        } else {
+            console.error("Ошибка при добавлении товара в корзину:", error);
+            Swal.fire({
+          title: 'Ошибка!',
+          text: "Не удалось добавить товар в корзину.",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
+        }
     }
-  },
+    }
+  }
+  
 };
 </script>

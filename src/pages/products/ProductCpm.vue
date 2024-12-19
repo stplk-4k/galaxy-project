@@ -19,7 +19,7 @@
           </div>
 
           
-          <button type="button" class="btn btn-primary">Купить</button>
+          <button @click="addToCart" type="button" class="btn btn-primary">Купить</button>
           
           <router-link to="/catalog">
             <button type="button" class="btn btn-secondary">Обратно в каталог</button>
@@ -52,15 +52,15 @@ export default {
       axios.get(`http://localhost:3000/api/product/${productId}`)
         .then(response => {
           this.product = response.data;
-          console.log(this.product); // Логируем полученные данные
+          console.log(this.product);
         })
         .catch(error => {
           console.error("Ошибка при получении продукта:", error);
         });
     },
     getImagePath(image) {
-      return image ? require(`@/assets/img/catalog/${image}`) : ''; // Возвращаем пустую строку, если image не задан
+      return image ? require(`@/assets/img/catalog/${image}`) : ''; 
     }
-  },
+  }
 };
 </script>

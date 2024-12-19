@@ -1,11 +1,17 @@
 <template>
   <div class="account">
     <div class="container">
-      <h2>Личный кабинет</h2>
+      <h2 class="account-header">Личный кабинет</h2>
 
-      <h3>Добро пожаловать, {{ username }}!</h3>
+      <h3 class="account-header">Добро пожаловать, {{ username }}!</h3>
+
       <div class="account-buttons">
-        <button @click="writeReview" class="btn btn-link btn-account">Написать отзыв</button>
+        <router-link to="/feedback">
+          <button class="btn btn-secondary">Написать отзыв</button>
+        </router-link>
+        <router-link to="/cart" class="btn btn-secondary btn-cart">
+          Перейти в корзину
+        </router-link>
         <button @click="logout" class="btn btn-primary">Выйти из аккаунта</button>
       </div>
     </div>
@@ -15,25 +21,19 @@
 
 <script>
 import { ref } from 'vue';
+import { getUsername, logout as clearLogin } from '@/store/auth';
 
 export default {
   setup() {
-    const username = ref(localStorage.getItem('username') || 'Гость');
-
-    const writeReview = () => {
-      // Логика для перехода на страницу написания отзыва
-      window.location.href = '/write-review'; // Замените на нужный маршрут
-    };
+    const username = ref(getUsername() || 'Гость');
 
     const logout = () => {
-      localStorage.removeItem('username');
-      localStorage.removeItem('token');
-      window.location.href = '/'; // Перенаправление на главную страницу после выхода
+      clearLogin();
+      window.location.href = '/';
     };
 
     return {
       username,
-      writeReview,
       logout,
     };
   },

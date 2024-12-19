@@ -48,8 +48,15 @@
 <script>
 import { ref } from 'vue';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { login } from '@/store/auth';
+
 
 export default {
+  name: 'RegistrationPage',
+  meta: {
+    title: 'Регистрация — Корпорация «Галактика»'
+  },
   setup() {
     const name = ref('');
     const username = ref('');
@@ -70,20 +77,24 @@ export default {
 
       if (Object.keys(errors.value).length === 0 && agree.value) {
         try {
-          await axios.post('http://localhost:3000/api/register', {
+          const response = await axios.post('http://localhost:3000/api/register', {
             name: name.value,
             username: username.value,
             email: email.value,
             password: password.value,
           });
 
-          alert('Регистрация успешна!');
+          Swal.fire({
+          title: 'Успешно!',
+          text: 'Регистрация успешна!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
 
-          // Сохранение логина в localStorage
-          localStorage.setItem('username', username.value);
+          login(username.value, response.data.token); 
 
-          // Перенаправление на страницу личного кабинета
-          window.location.href = '/account'; // Используем window.location.href
+          window.location.href = '/account'; 
         } catch (error) {
           alert(error.response.data.message);
         }
@@ -101,10 +112,4 @@ export default {
     };
   },
 };
-// export default {
-//   name: 'RegistrationPage',
-//   meta: {
-//     title: 'Регистрация — Корпорация «Галактика»'
-//   },
-// };
 </script>
