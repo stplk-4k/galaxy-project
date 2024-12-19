@@ -34,6 +34,7 @@
 <script>
 import axios from 'axios';
 import { isLoggedIn, getUsername } from '@/store/auth.js';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'ProductAmm',
@@ -62,7 +63,13 @@ export default {
     },
     async addToCart() {
       if (!isLoggedIn()) {
-        alert('Пожалуйста, войдите в систему, чтобы добавить товары в корзину.');
+        Swal.fire({
+          title: 'Ошибка!',
+          text: "Пожалуйста, войдите в систему, чтобы добавить товары в корзину.",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
         return;
       }
 
@@ -78,14 +85,32 @@ export default {
 
         console.log('Response from server:', response.data);
 
-        alert(response.data.message);
+        Swal.fire({
+          title: 'Успешно!',
+          text: response.data.message,
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
         this.$router.push('/cart');
       } catch (error) {
         if (error.response && error.response.status === 400) {
-            alert('Товар уже добавлен в корзину.');
+          Swal.fire({
+          title: 'Ошибка!',
+          text: "Товар уже добавлен в корзину.",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
         } else {
             console.error("Ошибка при добавлении товара в корзину:", error);
-            alert('Не удалось добавить товар в корзину.');
+            Swal.fire({
+          title: 'Ошибка!',
+          text: "Не удалось добавить товар в корзину.",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
         }
     }
     }

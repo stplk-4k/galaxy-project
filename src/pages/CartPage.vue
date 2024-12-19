@@ -36,7 +36,7 @@
         </li>
       </ul>
 
-      <p class="cart-total">Общая стоимость услуг:  {{ calculateTotal() }} руб.</p>
+      <p class="cart-total">Общая стоимость услуг: {{ calculateTotal() }} руб.</p>
 
       <router-link to="/catalog">
         <button type="button" class="btn btn-secondary">Добавить услуги</button>
@@ -58,6 +58,7 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { getUsername } from '@/store/auth';
+import Swal from 'sweetalert2';
 
 export default {
   setup() {
@@ -80,7 +81,7 @@ export default {
       const username = getUsername();
 
       if (!username) {
-        alert('Пожалуйста, войдите в систему, чтобы удалить товары из корзины.');
+        Swal.fire('Ошибка!', 'Пожалуйста, войдите в систему, чтобы удалить товары из корзины.', 'error');
         return;
       }
 
@@ -90,20 +91,21 @@ export default {
         });
 
         console.log('Response from server:', response.data);
-        alert(response.data.message);
-
         await fetchCartItems();
-        window.location.reload();
-        if (cartItems.value.length === 0) {
-          alert('Корзина пуста.');
-        }
+        Swal.fire({
+          title: 'Успешно!',
+          text: response.data.message,
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
       } catch (error) {
         console.error("Ошибка при удалении товара из корзины:", error);
 
         if (error.response && error.response.status === 404) {
-          alert('Товар не найден в корзине.');
+          Swal.fire('Ошибка!', "Товар не найден в корзине.", 'error');
         } else {
-          alert('Не удалось удалить товар из корзины.');
+          Swal.fire('Ошибка!', "Не удалось удалить товар из корзины.", 'error');
         }
       }
     };
@@ -112,7 +114,7 @@ export default {
       const username = getUsername();
 
       if (!username) {
-        alert('Пожалуйста, войдите в систему, чтобы очистить корзину.');
+        Swal.fire('Ошибка!', 'Пожалуйста, войдите в систему, чтобы очистить корзину.', 'error');
         return;
       }
 
@@ -121,17 +123,23 @@ export default {
           data: { username }
         });
 
-        cartItems.value = []; 
-        alert(response.data.message);
+        cartItems.value = [];
+        Swal.fire({
+          title: 'Успешно!',
+          text: response.data.message,
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
       } catch (error) {
         console.error("Ошибка при очистке корзины:", error);
-        alert('Не удалось очистить корзину.');
+        Swal.fire('Ошибка!', 'Не удалось очистить корзину.', 'error');
       }
     };
 
     const calculateTotal = () => {
       return cartItems.value.reduce((total, item) => {
-        return total + item.price; 
+        return total + item.price;
       }, 0);
     };
 

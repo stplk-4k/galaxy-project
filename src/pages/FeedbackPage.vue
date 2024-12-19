@@ -273,6 +273,7 @@ export default {
           text: 'Ваш отзыв успешно оставлен!',
           icon: 'success',
           confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
         });
 
         window.location.reload();

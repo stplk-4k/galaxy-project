@@ -41,7 +41,7 @@
                                             </router-link>
                                         </div>
                                         <div class="col-auto">
-                                            <button  type="submit" class="btn btn-primary btn-header">Войти</button>
+                                            <button type="submit" class="btn btn-primary btn-header">Войти</button>
                                         </div>
                                     </div>
                                 </form>
@@ -53,8 +53,9 @@
                                     <router-link to="/cart" class="btn btn-link btn-cart">
                                         <img src="@/assets/img/icons/cart.png" alt="Корзина">
                                     </router-link>
-                                    <router-link to="/account" class="btn btn-link btn-enter-true">Личный кабинет</router-link>
-                                    
+                                    <router-link to="/account" class="btn btn-link btn-enter-true">Личный
+                                        кабинет</router-link>
+
                                     <button @click="logout" class="btn btn-primary btn-header-exit">Выйти</button>
                                 </div>
                             </div>
@@ -72,6 +73,7 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { login as saveLogin, logout as clearLogin, isLoggedIn as checkIsLoggedIn } from '@/store/auth';
+import Swal from 'sweetalert2';
 
 export default {
     setup() {
@@ -86,7 +88,13 @@ export default {
 
         const loginUser = async () => {
             if (!login.value || !password.value) {
-                alert('Пожалуйста, введите логин и пароль.');
+                Swal.fire({
+                    title: 'Ошибка!',
+                    text: "Пожалуйста, введите логин и пароль.",
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#0060cc',
+                });
                 return;
             }
 
@@ -96,16 +104,34 @@ export default {
                     password: password.value,
                 });
 
-                alert('Вход успешен!');
-
                 saveLogin(login.value, response.data.token);
 
                 window.location.href = '/account';
+                Swal.fire({
+                    title: 'Успешно!',
+                    text: "Вход успешен!",
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#0060cc',
+                    allowOutsideClick: false,
+                });
             } catch (error) {
                 if (error.response && error.response.data) {
-                    alert(error.response.data.message); 
+                    Swal.fire({
+                        title: 'Ошибка!',
+                        text: error.response.data.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#0060cc',
+                    });
                 } else {
-                    alert('Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.');
+                    Swal.fire({
+                        title: 'Ошибка!',
+                        text: 'Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.',
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#0060cc',
+                    });
                 }
             }
         };

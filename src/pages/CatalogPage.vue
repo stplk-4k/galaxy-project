@@ -92,12 +92,12 @@
           <div class="row catalog-row">
             <div class="col-9 catalog-text">
               <h3 class="catalog-h">
-                <router-link to="/product-esb">«Галактика ESB»</router-link>
+                <router-link to="/product/7">«Галактика ESB»</router-link>
               </h3>
               <p>Получайте все бизнес-данные в едином информационном пространстве</p>
             </div>
             <div class="col-3 catalog-img-block">
-              <router-link to="/product-esb">
+              <router-link to="/product/7">
                 <img class="catalog-img " src="@/assets/img/catalog/esb.png" alt="«Галактика ESB»<">
               </router-link>
 

@@ -48,7 +48,8 @@
 <script>
 import { ref } from 'vue';
 import axios from 'axios';
-import { saveUsername } from '@/store/auth';
+import Swal from 'sweetalert2';
+import { login } from '@/store/auth';
 
 
 export default {
@@ -76,16 +77,22 @@ export default {
 
       if (Object.keys(errors.value).length === 0 && agree.value) {
         try {
-          await axios.post('http://localhost:3000/api/register', {
+          const response = await axios.post('http://localhost:3000/api/register', {
             name: name.value,
             username: username.value,
             email: email.value,
             password: password.value,
           });
 
-          alert('Регистрация успешна!');
+          Swal.fire({
+          title: 'Успешно!',
+          text: 'Регистрация успешна!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#0060cc',
+        });
 
-          saveUsername(username.value);
+          login(username.value, response.data.token); 
 
           window.location.href = '/account'; 
         } catch (error) {
