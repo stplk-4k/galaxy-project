@@ -41,19 +41,30 @@ app.post('/api/cart/add', (req, res) => {
 });
 
 app.get('/api/cart/:username', (req, res) => {
-  console.log('Received GET request for cart');
   const { username } = req.params;
-  console.log('Fetching cart for user:', username); 
 
   const userCart = cart.filter(item => item.username === username);
-  
-  console.log('User cart:', userCart); 
-  
-  if (userCart.length === 0) {
-      return res.status(404).json({ message: 'Корзина пуста' });
-  }
-  
-  res.json(userCart);
+
+  const productPromises = userCart.map(item => {
+      return new Promise((resolve, reject) => {
+          prod_db.get('SELECT * FROM products WHERE id = ?', [item.productId], (err, row) => {
+              if (err) {
+                  reject(err);
+              } else {
+                  resolve({ ...item, ...row }); 
+              }
+          });
+      });
+  });
+
+  Promise.all(productPromises)
+      .then(products => {
+          res.json(products); 
+      })
+      .catch(err => {
+          console.error("Ошибка при получении информации о товарах:", err);
+          res.status(500).send("Ошибка при получении информации о товарах");
+      });
 });
 
 app.delete('/api/cart/remove', (req, res) => {

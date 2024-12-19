@@ -798,8 +798,15 @@ h4 {
     display: flex;
 }
 
-.btn-cart-remove {
-    margin-top: -10px;
+.cart-row {
+    background: var(--g-light);
+    border-radius: 25px;
+    margin: 0px 50px 30px -25px;
+    padding: 20px 0 0 15px;
+}
+
+.cart-ul li{
+    list-style: none;
 }
 
 .btn-cart-clear {
@@ -808,4 +815,13 @@ h4 {
 
 .btn-cart-zero {
     margin: 30px 0 0 0;
+}
+.cart-color {
+    color: var(--g-blue);
+}
+
+.cart-total {
+    font-size: 18px;
+    font-style: italic;
+    margin: 40px 0 40px 35px;
 }

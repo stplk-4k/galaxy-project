@@ -2,24 +2,46 @@
   <div class="cart">
     <h2>Корзина</h2>
     <div v-if="cartItems.length > 0">
-      <ul>
+      <ul class="cart-ul">
         <li v-for="item in cartItems" :key="item.productId">
           <div class="row cart-row">
-            <div class="col-9">
-              <p>Товар ID: {{ item.productId }}</p>
-              <p>Название: {{ item.name }}</p>
-              <p>Описание: {{ item.description }}</p>
-              <p>Цена: {{ item.price }} руб.</p>
+            <div class="row">
+              <div class="col-2">
+                <p>Название</p>
+              </div>
+              <div class="col-9">
+                <p class="cart-color">{{ item.name }}</p>
+              </div>
+              <div class="col-1"><button @click="removeFromCart(item.productId)" class="btn btn-cart-remove">
+                  <img src="@/assets/img/icons/close.png" alt="Удалить">
+                </button></div>
             </div>
-            <div class="col-3">
-              <button @click="removeFromCart(item.productId)" class="btn btn-cart-remove">
-                <img src="@/assets/img/icons/close.png" alt="Удалить">
-              </button>
+            <div class="row">
+              <div class="col-2">
+                <p>Описание</p>
+              </div>
+              <div class="col-9">
+                <p>{{ item.short_description }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-2">
+                <p>Цена</p>
+              </div>
+              <div class="col-9">
+                <p class="cart-color">{{ item.price }} руб.</p>
+              </div>
             </div>
           </div>
         </li>
       </ul>
-      <button class="btn btn-link btn-cart-clear" @click="clearCart">Очистить корзину</button>
+
+      <p class="cart-total">Общая стоимость услуг:  {{ calculateTotal() }} руб.</p>
+
+      <router-link to="/catalog">
+        <button type="button" class="btn btn-secondary">Добавить услуги</button>
+      </router-link>
+      <button class="btn btn-secondary btn-cart-clear" @click="clearCart">Очистить корзину</button>
       <button class="btn btn-primary" @click="checkout">Оформить заказ</button>
 
     </div>
@@ -43,7 +65,6 @@ export default {
 
     const fetchCartItems = async () => {
       const username = getUsername();
-      // const username = localStorage.getItem('username');
       if (!username) return;
 
       try {
@@ -96,18 +117,22 @@ export default {
       }
 
       try {
-        // Отправляем запрос на сервер для очистки корзины
         const response = await axios.delete('http://localhost:3000/api/cart/clear', {
           data: { username }
         });
 
-        // Обновляем состояние корзины
-        cartItems.value = []; // Очищаем массив товаров в корзине
+        cartItems.value = []; 
         alert(response.data.message);
       } catch (error) {
         console.error("Ошибка при очистке корзины:", error);
         alert('Не удалось очистить корзину.');
       }
+    };
+
+    const calculateTotal = () => {
+      return cartItems.value.reduce((total, item) => {
+        return total + item.price; 
+      }, 0);
     };
 
     onMounted(fetchCartItems);
@@ -116,6 +141,7 @@ export default {
       cartItems,
       removeFromCart,
       clearCart,
+      calculateTotal,
     };
   },
 };
