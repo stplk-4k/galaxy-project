@@ -24,7 +24,9 @@
 
         <div v-else>
           <h2>Здравствуйте, {{ username }}!</h2>
-          <button @click="writeReview" class="btn btn-link btn-enter-true">Написать отзыв</button>
+          <router-link to="/feedback" class="btn btn-link btn-cart">
+            <button class="btn btn-link btn-enter-true">Написать отзыв</button>
+          </router-link>
           <button @click="logout" class="btn btn-primary">Выйти из аккаунта</button>
 
         </div>
@@ -38,7 +40,7 @@
 <script>
 import axios from 'axios';
 import { ref } from 'vue';
-import { login as saveLogin, logout as clearLogin, isLoggedIn } from '@/store/auth';
+import { login as saveLogin, logout as clearLogin, isLoggedIn, getUsername } from '@/store/auth';
 
 export default {
   name: 'EnterPage',
@@ -53,7 +55,7 @@ export default {
     const isUserLoggedIn = isLoggedIn();
 
     if (isUserLoggedIn) {
-      username.value = localStorage.getItem('username');
+      username.value = getUsername();
     }
 
     const login = async () => {
@@ -82,17 +84,12 @@ export default {
       window.location.href = '/';
     };
 
-    const writeReview = () => {
-      window.location.href = '/write-review';
-    };
-
     return {
       username,
       password,
       errors,
       login,
       logout,
-      writeReview,
       isUserLoggedIn,
     };
   },

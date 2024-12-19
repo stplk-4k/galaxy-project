@@ -77,7 +77,7 @@ export default {
     };
 
     const removeFromCart = async (productId) => {
-      const username = localStorage.getItem('username');
+      const username = getUsername();
 
       if (!username) {
         alert('Пожалуйста, войдите в систему, чтобы удалить товары из корзины.');

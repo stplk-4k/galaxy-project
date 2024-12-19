@@ -33,7 +33,7 @@
 
 <script>
 import axios from 'axios';
-import { isLoggedIn } from '@/store/auth.js';
+import { isLoggedIn, getUsername } from '@/store/auth.js';
 
 export default {
   name: 'ProductAmm',
@@ -66,7 +66,7 @@ export default {
         return;
       }
 
-      const username = localStorage.getItem('username');
+      const username = getUsername(); 
       console.log('Adding to cart:', { productId: this.product.id, username });
 
       try {

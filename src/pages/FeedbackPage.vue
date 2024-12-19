@@ -133,7 +133,7 @@ export default {
     const isLoggedIn = ref(false);
 
     const checkAuthStatus = () => {
-      isLoggedIn.value = checkLoginStatus(); 
+      isLoggedIn.value = checkLoginStatus();
     };
 
     const swiperOptions = {
@@ -141,7 +141,13 @@ export default {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      loop: true, 
+      autoplay: {
+        delay: 3000, 
+        disableOnInteraction: false,
+      },
     };
+
     const cities = ref([
       'Москва',
       'Санкт-Петербург',
@@ -250,8 +256,7 @@ export default {
         const response = await axios.post('http://localhost:3000/api/reviews', reviewData);
 
         reviews.value.push(response.data);
-        
-        // Сброс формы
+
         formData.value = {
           name: '',
           review: '',
@@ -273,19 +278,19 @@ export default {
         window.location.reload();
       } catch (error) {
         let errorMessage = 'Произошла ошибка при отправке отзыва.';
-        
+
         if (error.response) {
-            errorMessage = error.response.data.message || 'Серверная ошибка.';
-            console.error('Error response:', error.response); 
+          errorMessage = error.response.data.message || 'Серверная ошибка.';
+          console.error('Error response:', error.response);
         } else if (error.request) {
-            console.error('Error request:', error.request); 
-            errorMessage = 'Ошибка соединения с сервером.';
+          console.error('Error request:', error.request);
+          errorMessage = 'Ошибка соединения с сервером.';
         } else {
-            console.error('Error message:', error.message); 
+          console.error('Error message:', error.message);
         }
 
         Swal.fire('Ошибка!', errorMessage, 'error');
-    }
+      }
     }
 
     onMounted(() => {

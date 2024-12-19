@@ -278,7 +278,7 @@ h4 {
 }
 
 .main-row-space {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 }
 
 /* FOOTER */
@@ -731,6 +731,18 @@ h4 {
     height: 25px;
     background: url(../img/icons/arrow-right.png) no-repeat;
 }
+
+.swiper-button-prev-home {
+    left: -50px;
+    /* width: 25px;
+    height: 25px; */
+    /* background: url(../img/icons/arrow-left.png) no-repeat; */
+}
+
+.swiper-button-next-home {
+    right: -50px;
+}
+
 .review-slide p {
     margin-bottom: 0;
 }
@@ -790,6 +802,10 @@ h4 {
 
 .btn-account {
     margin-right: 30px;
+}
+
+.account-header {
+    margin-left: 30px;
 }
 
 /* CART */
