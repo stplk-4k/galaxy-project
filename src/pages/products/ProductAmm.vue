@@ -18,7 +18,8 @@
             <p>{{ product.price }} руб.</p>
           </div>
 
-          <button type="button" class="btn btn-primary">Купить</button>
+          <button type="button" class="btn btn-primary" @click="addToCart">Купить</button>
+          <!-- <button class="btn btn-primary" @click="addToCart">Купить</button> -->
           <router-link to="/catalog">
             <button type="button" class="btn btn-secondary">Обратно в каталог</button>
           </router-link>
@@ -33,6 +34,7 @@
 
 <script>
 import axios from 'axios';
+import { isLoggedIn } from '@/store/auth.js';
 
 export default {
   name: 'ProductAmm',
@@ -58,7 +60,37 @@ export default {
     },
     getImagePath(image) {
       return image ? require(`@/assets/img/catalog/${image}`) : ''; 
+    },
+    async addToCart() {
+      if (!isLoggedIn()) {
+        alert('Пожалуйста, войдите в систему, чтобы добавить товары в корзину.');
+        return;
+      }
+
+      const username = localStorage.getItem('username');
+      console.log('Adding to cart:', { productId: this.product.id, username });
+
+      try {
+        
+        const response = await axios.post('http://localhost:3000/api/cart/add', {
+          productId: this.product.id,
+          username: username, 
+        });
+
+        console.log('Response from server:', response.data);
+
+        alert(response.data.message);
+        this.$router.push('/cart');
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+            alert('Товар уже добавлен в корзину.');
+        } else {
+            console.error("Ошибка при добавлении товара в корзину:", error);
+            alert('Не удалось добавить товар в корзину.');
+        }
     }
-  },
+    }
+  }
+  
 };
 </script>

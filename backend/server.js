@@ -1,8 +1,8 @@
 const express = require('express');
-const app = express();
-const port = 3000;
-const uuid = require('uuid');
 const cors = require('cors');
+const app = express();
+const port = process.env.PORT || 3000;
+const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const sqlite3 = require('sqlite3').verbose();
@@ -16,7 +16,51 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+
+let cart = [];
+
+app.post('/api/cart/add', (req, res) => {
+  console.log('Request body:', req.body); // Логируем тело запроса
+  const { productId, username } = req.body;
+
+  console.log('Received:', { productId, username }); // Логируем полученные данные
+
+  if (!username) {
+      return res.status(401).json({ message: 'Пользователь не авторизован' });
+  }
+
+  const existingItem = cart.find(item => item.productId === productId && item.username === username);
+  if (existingItem) {
+      return res.status(400).json({ message: 'Товар уже добавлен в корзину' });
+  }
+
+  cart.push({ productId, username }); // Добавляем товар в корзину
+  console.log('Cart after addition:', cart); // Логируем текущее состояние корзины
+  res.status(200).json({ message: 'Товар добавлен в корзину' });
+});
+
+
+
+// Получение товаров из корзины для конкретного пользователя
+app.get('/api/cart/:username', (req, res) => {
+  console.log('Received GET request for cart'); // Логируем получение запроса
+  const { username } = req.params;
+  console.log('Fetching cart for user:', username); // Логируем имя пользователя
+
+  const userCart = cart.filter(item => item.username === username);
+  
+  console.log('User cart:', userCart); // Логируем содержимое корзины для пользователя
+  
+  if (userCart.length === 0) {
+      return res.status(404).json({ message: 'Корзина пуста' });
+  }
+  
+  res.json(userCart);
+});
+
 app.use(bodyParser.json());
+
 
 const db = new sqlite3.Database('./users.db', (err) => {
   if (err) {
@@ -47,9 +91,6 @@ app.get('/api/product/:id', (req, res) => {
       }
   });
 });
-
-
-
 
 app.post('/api/register', async (req, res) => {
   const { name, username, email, password } = req.body;
@@ -102,6 +143,44 @@ app.post('/api/login', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+// app.post('/api/cart/add', (req, res) => {
+//   const { productId, username } = req.body;
+
+//   if (!username) {
+//       return res.status(401).json({ message: 'Пользователь не авторизован' });
+//   }
+
+//   cart.push({ productId, username }); // Добавляем товар в корзину
+//   res.status(200).json({ message: 'Товар добавлен в корзину' });
+// });
+
+
+// const services = [
+//   { id: 'product-amm', name: '«Галактика AMM»', description: 'Постройте прибыльный и эффективный производственный процесс на любом предприятии' },
+//   { id: 'product-cpm', name: '«Галактика CPM»', description: 'Достигайте совершенства в управлении финансами и принимайте решения в режиме реального времени' },
+//   { id: 'product-eam', name: '«Галактика EAM»', description: 'Снижайте стоимость владения активами и сокращайте затраты на их восстановление' },
+//   { id: 'product-erp', name: '«Галактика ERP»', description: 'Эффективно решайте текущие и стратегические управленческие задачи современного предприятия' },
+//   { id: 'product-ecm', name: '«Галактика ECM»', description: 'Управляйте документами и корпоративной информацией' },
+//   { id: 'product-esb', name: '«Галактика ESB»', description: 'Получайте все бизнес-данные в едином информационном пространстве' },
+//   { id: 'product-mes', name: '«Галактика MES»', description: 'Реализуйте планирование по операциям и диспетчеризацию внутри производственных подразделений' },
+//   { id: 'product-vuz', name: '«Галактика ВУЗ»', description: 'Управляйте учебным процессом и научной деятельностью университета' },
+//   { id: 'product-elms', name: '«Галактика eLMS»', description: 'Организуйте сквозной процесс обучения с возможностью интеграции с уже существующими системами' },
+//   { id: 'product-ruz', name: '«Галактика РУЗ»', description: 'Эффективно управляйте ресурсами вуза. Экономьте время при подготовке расписания учебных занятий' },
+// ];
+
+// app.post('/api/search-services', (req, res) => {
+//   const searchString = req.body.searchString.toLowerCase();
+//   const filteredServices = services.filter(service => {
+//       return service.name.toLowerCase().includes(searchString) || 
+//              service.description.toLowerCase().includes(searchString);
+//   });
+//   res.json(filteredServices);
+// });
+
+// app.listen(port, () => {
+//   console.log(`Server started on port ${port}`);
+// });
 
 // app.get('/api/products/:id', (req, res) => {
 //   const id = req.params.id;
