@@ -41,6 +41,10 @@ import { ref } from 'vue';
 import { login as saveLogin, logout as clearLogin, isLoggedIn } from '@/store/auth';
 
 export default {
+  name: 'EnterPage',
+  meta: {
+    title: 'Вход — Корпорация «Галактика»'
+  },
   setup() {
     const username = ref('');
     const password = ref('');
@@ -93,11 +97,4 @@ export default {
     };
   },
 };
-
-// export default {
-//   name: 'RegistrationPage',
-//   meta: {
-//     title: 'Вход — Корпорация «Галактика»'
-//   },
-// };
 </script>

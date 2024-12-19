@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-// import auth from '../store/auth.js';
 import Home from '../pages/HomePage.vue';
 import Catalog from '../pages/CatalogPage.vue';
 import Service from '../pages/ServicePage.vue';
@@ -35,18 +34,12 @@ const routes = [
     { path: '/product/:id', name: 'ProductCpm', component: ProductCpm },
     { path: '/product/:id', name: 'ProductEam', component: ProductEam },
     { path: '/product/:id', name: 'ProductElms', component: ProductElms },
-    // { path: '/product-amm', name: 'ProductAmm', component: ProductAmm },
-    // { path: '/product-cpm', name: 'ProductCpm', component: ProductCpm },
-    // { path: '/product-eam', name: 'ProductEam', component: ProductEam },
-    // { path: '/product-eam', name: 'ProductEam', component: ProductEam },
     { path: '/product/:id', name: 'ProductErp', component: ProductErp },
-    // { path: '/product-erp', name: 'ProductErp', component: ProductErp },
-    { path: '/product-ecm', name: 'ProductEcm', component: ProductEcm },
-    { path: '/product-esb', name: 'ProductEsb', component: ProductEsb },
-    { path: '/product-mes', name: 'ProductMes', component: ProductMes },
-    { path: '/product-vuz', name: 'ProductVuz', component: ProductVuz },
-    // { path: '/product-elms', name: 'ProductElms', component: ProductElms },
-    { path: '/product-ruz', name: 'ProductRuz', component: ProductRuz },
+    { path: '/product/:id', name: 'ProductEcm', component: ProductEcm },
+    { path: '/product/:id', name: 'ProductEsb', component: ProductEsb },
+    { path: '/product/:id', name: 'ProductMes', component: ProductMes },
+    { path: '/product/:id', name: 'ProductVuz', component: ProductVuz },
+    { path: '/product/:id', name: 'ProductRuz', component: ProductRuz },
     { path: '/feedback', name: 'FeedbackPage', component: FeedbackPage },
     { path: '/registration', name: 'RegistrationPage', component: RegistrationPage },
     { path: '/enter', name: 'EnterPage', component: EnterPage },
@@ -61,20 +54,5 @@ const routes = [
     routes,
   });
 
-  // const store = createStore({
-  //   modules: {
-  //     auth,
-  //   }
-  // });
-
 export default router;
 
-  // export default {
-  //   router, 
-  //   // store,
-  // };
-  
-  // export default {
-  //   router, 
-  //   store,
-  // };

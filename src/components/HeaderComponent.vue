@@ -13,7 +13,6 @@
                         <div class="col-sm-4 header-div-form">
                             <div v-if="!isLoggedIn">
                                 <form class="header-form" @submit.prevent="loginUser">
-                                    <!-- Используем @submit.prevent -->
                                     <div class="row g-3 mb-3 align-items-right ">
                                         <div class="col-auto mr-5 header-form-login">
                                             <label for="inputLogin"

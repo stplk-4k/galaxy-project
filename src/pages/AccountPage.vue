@@ -26,7 +26,7 @@ export default {
     const username = ref(getUsername() || 'Гость');
 
     const writeReview = () => {
-      window.location.href = '/writeReview';
+      window.location.href = '/feedback';
     };
 
     const logout = () => {

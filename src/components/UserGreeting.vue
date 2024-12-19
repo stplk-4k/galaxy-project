@@ -26,7 +26,7 @@ export default {
       window.location.href = '/'; 
     },
     writeReview() {
-      window.location.href = '/write-review'; 
+      window.location.href = '/feedback'; 
     },
   },
 };

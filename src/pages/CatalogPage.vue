@@ -175,30 +175,28 @@
 </template>
 
 <script>
-// export default {
-//   name: 'CatalogPage',
-//   meta: {
-//     title: 'Каталог — Корпорация «Галактика»'
-//   },
-// };
 
 import { ref } from 'vue';
 import axios from 'axios';
 
 export default {
+  name: 'CatalogPage',
+  meta: {
+    title: 'Каталог — Корпорация «Галактика»'
+  },
   setup() {
     const products = ref([]);
 
     const loadProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/products'); // Эндпоинт для получения всех продуктов
-        products.value = response.data; // Загружаем данные о продуктах
+        const response = await axios.get('http://localhost:3000/api/products'); 
+        products.value = response.data; 
       } catch (error) {
         console.error('Ошибка загрузки продуктов:', error);
       }
     };
 
-    loadProducts(); // Вызываем функцию загрузки продуктов при монтировании компонента
+    loadProducts(); 
 
     return {
       products,

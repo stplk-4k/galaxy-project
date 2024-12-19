@@ -52,6 +52,10 @@ import { saveUsername } from '@/store/auth';
 
 
 export default {
+  name: 'RegistrationPage',
+  meta: {
+    title: 'Регистрация — Корпорация «Галактика»'
+  },
   setup() {
     const name = ref('');
     const username = ref('');
@@ -101,10 +105,4 @@ export default {
     };
   },
 };
-// export default {
-//   name: 'RegistrationPage',
-//   meta: {
-//     title: 'Регистрация — Корпорация «Галактика»'
-//   },
-// };
 </script>
